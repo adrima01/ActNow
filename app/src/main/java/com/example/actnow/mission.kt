@@ -10,7 +10,7 @@ data class MissionDto(
 data class SingleMissionDto (
     val id: Int,
     val titre: String,
-    val association: String,
+    val association: SingleAssociationDto,
     val date: Date,
     val heure: Time,
     val lieu: String,
@@ -25,7 +25,7 @@ val missionData = MissionDto(
         SingleMissionDto(
             id = 1,
             titre = "Marché de Noël",
-            association = "Les pères Noël",
+            association = associationData.associations[0],
             date = Date.valueOf("2025-12-05"),
             heure = Time.valueOf("14:30:00"),
             lieu = "Metz",
