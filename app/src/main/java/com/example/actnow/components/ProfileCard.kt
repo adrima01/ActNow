@@ -29,135 +29,124 @@ import com.example.actnow.R
 
 @Composable
 fun ProfileCard() {
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = { Text("ActNow") }
-            )
-        }
-    ) { padding ->
-        Column(
+    Column(
+        verticalArrangement = Arrangement.spacedBy(20.dp),
+        modifier = Modifier.padding(8.dp)
+    ) {
+        Card(
+            shape = RoundedCornerShape(16.dp),
             modifier = Modifier
-                .fillMaxSize()
-                .padding(padding)
-                .padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(20.dp)
+                .padding(8.dp)
         ) {
-            Card(
-                shape = RoundedCornerShape(16.dp),
-                modifier = Modifier
-                    .padding(8.dp)
-            ) {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(8.dp)
-                ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.profile),
-                        contentDescription = "profile picture",
-                        contentScale = ContentScale.Crop,
-                        modifier = Modifier
-                            .size(80.dp)
-                            .clip(CircleShape)
-                    )
-
-                    Spacer(modifier = Modifier.width(16.dp))
-
-                    Column {
-                        Text(
-                            text = "Adrian MARAJ",
-                            fontSize = 20.sp,
-                            fontWeight = FontWeight.Bold
-                        )
-                        Text(
-                            text = "Membre depuis octobre 2025",
-                            fontSize = 14.sp,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
-                        Column(
-                            modifier = Modifier.fillMaxWidth()
-                        ){
-                            Text("Progression", fontWeight = FontWeight.SemiBold)
-                            Spacer(modifier = Modifier.height(8.dp))
-                            LinearProgressIndicator(
-                                progress = { 0.75f },
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .height(10.dp),
-                                color = Color.Blue,
-                                trackColor = Color.White,
-                            )
-                            Spacer(modifier = Modifier.height(4.dp))
-                            Text("75 %", fontSize = 12.sp)
-                        }
-                    }
-                }
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(12.dp)
-                ) {
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.spacedBy(12.dp)
-                    ) {
-                        StatCard(
-                            title = "Heures de bénévolat",
-                            value = "120",
-                            modifier = Modifier.weight(1f),
-                            icon = Icons.Filled.AccessTime,
-                            iconDescription = "Clock Icon",
-                            color = Color.Blue
-                        )
-                        StatCard(
-                            title = "Points d'impact",
-                            value = "125",
-                            modifier = Modifier.weight(1f),
-                            icon = Icons.Filled.Favorite,
-                            iconDescription = "Heart Icon",
-                            color = Color.Yellow
-                        )
-                    }
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.spacedBy(12.dp)
-                    ) {
-                        StatCard(
-                            title = "Missions complétées",
-                            value = "15",
-                            modifier = Modifier.weight(1f),
-                            icon = Icons.Filled.Done,
-                            iconDescription = "Done Icon",
-                            color = Color.Green
-                        )
-                        StatCard(
-                            title = "Missions à venir",
-                            value = "3",
-                            modifier = Modifier.weight(1f),
-                            icon = Icons.Filled.DateRange,
-                            iconDescription = "Date Icon",
-                            color = Color.Red
-                        )
-                    }
-                }
-            }
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(8.dp)
             ) {
-                Icon(
-                    imageVector = Icons.Filled.Star,
-                    contentDescription = "Star Icon",
+                Image(
+                    painter = painterResource(id = R.drawable.profile),
+                    contentDescription = "profile picture",
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .size(80.dp)
+                        .clip(CircleShape)
                 )
-                Text(
-                    text = "Mes badges",
-                    fontSize = 20.sp,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
+
+                Spacer(modifier = Modifier.width(16.dp))
+
+                Column {
+                    Text(
+                        text = "Adrian MARAJ",
+                        fontSize = 20.sp,
+                        fontWeight = FontWeight.Bold
+                    )
+                    Text(
+                        text = "Membre depuis octobre 2025",
+                        fontSize = 14.sp,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                    Column(
+                        modifier = Modifier.fillMaxWidth()
+                    ){
+                        Text("Progression", fontWeight = FontWeight.SemiBold)
+                        Spacer(modifier = Modifier.height(8.dp))
+                        LinearProgressIndicator(
+                            progress = { 0.75f },
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(10.dp),
+                            color = Color.Blue,
+                            trackColor = Color.White,
+                        )
+                        Spacer(modifier = Modifier.height(4.dp))
+                        Text("75 %", fontSize = 12.sp)
+                    }
+                }
             }
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp),
+                verticalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(12.dp)
+                ) {
+                    StatCard(
+                        title = "Heures de bénévolat",
+                        value = "120",
+                        modifier = Modifier.weight(1f),
+                        icon = Icons.Filled.AccessTime,
+                        iconDescription = "Clock Icon",
+                        color = Color.Blue
+                    )
+                    StatCard(
+                        title = "Points d'impact",
+                        value = "125",
+                        modifier = Modifier.weight(1f),
+                        icon = Icons.Filled.Favorite,
+                        iconDescription = "Heart Icon",
+                        color = Color.Yellow
+                    )
+                }
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(12.dp)
+                ) {
+                    StatCard(
+                        title = "Missions complétées",
+                        value = "15",
+                        modifier = Modifier.weight(1f),
+                        icon = Icons.Filled.Done,
+                        iconDescription = "Done Icon",
+                        color = Color.Green
+                    )
+                    StatCard(
+                        title = "Missions à venir",
+                        value = "3",
+                        modifier = Modifier.weight(1f),
+                        icon = Icons.Filled.DateRange,
+                        iconDescription = "Date Icon",
+                        color = Color.Red
+                    )
+                }
+            }
+        }
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
+        ) {
+            Icon(
+                imageVector = Icons.Filled.Star,
+                contentDescription = "Star Icon",
+            )
+            Text(
+                text = "Mes badges",
+                fontSize = 20.sp,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
         }
     }
 }

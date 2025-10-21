@@ -23,6 +23,11 @@ fun MainScreen() {
     )
 
     Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text("ActNow") }
+            )
+        },
         bottomBar = {
             NavigationBar {
                 items.forEachIndexed { index, item ->

@@ -7,6 +7,9 @@ import androidx.compose.runtime.*
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MissionScreen() {
+    Text(
+        text = "Hallo"
+    )
 
 }
 
