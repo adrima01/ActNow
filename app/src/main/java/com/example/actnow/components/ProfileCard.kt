@@ -11,7 +11,6 @@ import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Done
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Star
-import androidx.compose.material.icons.filled.ThumbUp
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -79,20 +78,19 @@ fun ProfileCard() {
                         )
                         Column(
                             modifier = Modifier.fillMaxWidth()
-                        ) {
+                        ){
                             Text("Progression", fontWeight = FontWeight.SemiBold)
                             Spacer(modifier = Modifier.height(8.dp))
                             LinearProgressIndicator(
-                                progress = 0.75f, //
+                                progress = { 0.75f },
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .height(10.dp)
-                                    .clip(RoundedCornerShape(50)),
-                                color = MaterialTheme.colorScheme.primary,
-                                trackColor = MaterialTheme.colorScheme.surfaceVariant
+                                    .height(10.dp),
+                                color = Color.Blue,
+                                trackColor = Color.White,
                             )
                             Spacer(modifier = Modifier.height(4.dp))
-                            Text("70 %", fontSize = 12.sp)
+                            Text("75 %", fontSize = 12.sp)
                         }
                     }
                 }
