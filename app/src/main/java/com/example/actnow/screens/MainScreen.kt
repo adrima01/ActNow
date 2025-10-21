@@ -5,10 +5,10 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Settings
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.CalendarToday
+import androidx.compose.material.icons.filled.Map
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -17,9 +17,9 @@ fun MainScreen() {
     var selectedItem by remember { mutableStateOf(0) }
 
     val items = listOf(
-        NavItem("Missions", Icons.Filled.Home),
-        NavItem("Carte", Icons.Filled.Favorite),
-        NavItem("Profile", Icons.Filled.Settings)
+        NavItem("Missions", Icons.Filled.CalendarToday),
+        NavItem("Carte", Icons.Filled.Map),
+        NavItem("Profile", Icons.Filled.AccountCircle)
     )
 
     Scaffold(

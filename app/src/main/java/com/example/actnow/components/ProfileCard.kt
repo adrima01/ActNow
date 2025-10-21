@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccessTime
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Done
 import androidx.compose.material.icons.filled.Favorite
@@ -109,8 +110,8 @@ fun ProfileCard() {
                             title = "Heures de bénévolat",
                             value = "120",
                             modifier = Modifier.weight(1f),
-                            icon = Icons.Filled.ThumbUp,
-                            iconDescription = "Thump up Icon",
+                            icon = Icons.Filled.AccessTime,
+                            iconDescription = "Clock Icon",
                             color = Color.Blue
                         )
                         StatCard(
