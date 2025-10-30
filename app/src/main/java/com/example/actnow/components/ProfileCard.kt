@@ -6,37 +6,44 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccessTime
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Done
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.actnow.R
+import androidx.compose.foundation.border
+import com.example.actnow.utilisateur
+import java.text.SimpleDateFormat
+import java.util.Locale
+
 
 
 @Composable
 fun ProfileCard() {
+    val sdf = SimpleDateFormat("MMMM yyyy", Locale.FRENCH)
+    val formattedDate = sdf.format(utilisateur.date)
+
     Column(
         verticalArrangement = Arrangement.spacedBy(20.dp),
-        modifier = Modifier.padding(8.dp)
+        modifier = Modifier.padding(16.dp)
     ) {
         Card(
             shape = RoundedCornerShape(16.dp),
             modifier = Modifier
-                .padding(8.dp)
+                .fillMaxWidth()
+                .border(1.dp, Color.Black, shape = RoundedCornerShape(16.dp)),
+            colors = CardDefaults.cardColors(
+                containerColor = Color.White
+            ),
         ) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
@@ -45,11 +52,11 @@ fun ProfileCard() {
                     .padding(8.dp)
             ) {
                 Image(
-                    painter = painterResource(id = R.drawable.profile),
+                    painter = painterResource(id = R.drawable.profile_monsieur),
                     contentDescription = "profile picture",
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
-                        .size(80.dp)
+                        .size(90.dp)
                         .clip(CircleShape)
                 )
 
@@ -57,30 +64,47 @@ fun ProfileCard() {
 
                 Column {
                     Text(
-                        text = "Adrian MARAJ",
+                        text = utilisateur.prenom + " " + utilisateur.nom,
                         fontSize = 20.sp,
-                        fontWeight = FontWeight.Bold
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.padding(8.dp)
                     )
                     Text(
-                        text = "Membre depuis octobre 2025",
+                        text = "Membre depuis $formattedDate",
                         fontSize = 14.sp,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                        modifier = Modifier.padding(8.dp)
                     )
-                    Column(
-                        modifier = Modifier.fillMaxWidth()
-                    ){
-                        Text("Progression", fontWeight = FontWeight.SemiBold)
-                        Spacer(modifier = Modifier.height(8.dp))
-                        LinearProgressIndicator(
-                            progress = { 0.75f },
+                    Row {
+                        Card (
+                            shape = RoundedCornerShape(16.dp),
                             modifier = Modifier
-                                .fillMaxWidth()
-                                .height(10.dp),
-                            color = Color.Blue,
-                            trackColor = Color.White,
-                        )
-                        Spacer(modifier = Modifier.height(4.dp))
-                        Text("75 %", fontSize = 12.sp)
+                                .padding(6.dp),
+                            colors = CardDefaults.cardColors(
+                                containerColor = Color.Blue.copy(alpha = 0.6f)
+                            )
+                        ) {
+                            Text(
+                                modifier = Modifier
+                                    .padding(8.dp),
+                                text = "Super-Bénévole",
+                                color = Color.White
+                            )
+                        }
+                        Card (
+                            shape = RoundedCornerShape(16.dp),
+                            modifier = Modifier
+                                .padding(6.dp),
+                            colors = CardDefaults.cardColors(
+                                containerColor = Color.Blue.copy(alpha = 0.6f)
+                            )
+                        ){
+                            Text(
+                                modifier = Modifier
+                                    .padding(8.dp),
+                                text = "${utilisateur.heures}h de bénévolat",
+                                color = Color.White
+                            )
+                        }
                     }
                 }
             }
@@ -95,29 +119,8 @@ fun ProfileCard() {
                     horizontalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
                     StatCard(
-                        title = "Heures de bénévolat",
-                        value = "120",
-                        modifier = Modifier.weight(1f),
-                        icon = Icons.Filled.AccessTime,
-                        iconDescription = "Clock Icon",
-                        color = Color.Blue
-                    )
-                    StatCard(
-                        title = "Points d'impact",
-                        value = "125",
-                        modifier = Modifier.weight(1f),
-                        icon = Icons.Filled.Favorite,
-                        iconDescription = "Heart Icon",
-                        color = Color.Yellow
-                    )
-                }
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(12.dp)
-                ) {
-                    StatCard(
-                        title = "Missions complétées",
-                        value = "15",
+                        title = "Mission(s) complétée(s)",
+                        value = utilisateur.missionsCompletees,
                         modifier = Modifier.weight(1f),
                         icon = Icons.Filled.Done,
                         iconDescription = "Done Icon",
@@ -125,73 +128,32 @@ fun ProfileCard() {
                     )
                     StatCard(
                         title = "Missions à venir",
-                        value = "3",
+                        value = utilisateur.missionsAVenir,
                         modifier = Modifier.weight(1f),
                         icon = Icons.Filled.DateRange,
                         iconDescription = "Date Icon",
-                        color = Color.Red
+                        color = Color.Magenta
                     )
                 }
             }
-        }
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Center
-        ) {
-            Icon(
-                imageVector = Icons.Filled.Star,
-                contentDescription = "Star Icon",
-            )
-            Text(
-                text = "Mes badges",
-                fontSize = 20.sp,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
-            )
-        }
-    }
-}
-
-@Composable
-fun StatCard(title: String, value: String, modifier: Modifier = Modifier, icon: ImageVector, iconDescription: String, color: Color) {
-    Card(
-        modifier = modifier
-            .height(80.dp),
-        shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = color.copy(alpha = 0.4f)
-        ),
-        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
-    ) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(8.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-        ) {
-            Row(
+            Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(8.dp),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Icon(
-                    imageVector = icon,
-                    contentDescription = iconDescription
+                    .padding(16.dp)
+            ){
+                Text("Progression vers Méga-Bénévole", fontWeight = FontWeight.SemiBold)
+                Spacer(modifier = Modifier.height(8.dp))
+                LinearProgressIndicator(
+                    progress = { 0.75f },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(10.dp),
+                    color = Color.Blue,
+                    trackColor = Color.LightGray,
                 )
-                Text(
-                    text = value,
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 25.sp
-                )
+                Spacer(modifier = Modifier.height(4.dp))
+                Text("75 %", fontSize = 12.sp)
             }
-            Text(
-                text = title,
-                fontSize = 14.sp,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                textAlign = TextAlign.Start
-            )
         }
     }
 }
-
