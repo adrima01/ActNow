@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
@@ -28,10 +27,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.actnow.R
 
 @Composable
-fun BadgeCard(title: String, description: String, modifier: Modifier) {
+fun BadgeCard(title: String, description: String, image: Int, modifier: Modifier) {
     Card(
         modifier = modifier
             .padding(16.dp)
@@ -46,18 +44,18 @@ fun BadgeCard(title: String, description: String, modifier: Modifier) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(8.dp),
+                .padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
+            verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             Row(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(8.dp),
-                horizontalArrangement = Arrangement.SpaceBetween
+                    .fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 Image(
-                    painter = painterResource(id = R.drawable.profile_monsieur),
+                    painter = painterResource(id = image),
                     contentDescription = "profile picture",
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
@@ -67,8 +65,7 @@ fun BadgeCard(title: String, description: String, modifier: Modifier) {
                 Text(
                     text = title,
                     fontWeight = FontWeight.Bold,
-                    fontSize = 16.sp,
-                    modifier = Modifier.padding(8.dp),
+                    fontSize = 14.sp,
                     textAlign = TextAlign.Center
                 )
             }

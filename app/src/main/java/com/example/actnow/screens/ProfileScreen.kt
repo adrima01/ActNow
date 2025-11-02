@@ -55,6 +55,7 @@ fun ProfileScreen() {
                     BadgeCard(
                         title = badge.titre,
                         description = badge.description,
+                        image = badge.image,
                         modifier = Modifier.weight(1f)
                     )
                 }
@@ -91,6 +92,7 @@ fun ProfileScreen() {
                     BadgeCard(
                         title = badge.titre,
                         description = badge.description,
+                        image = badge.image,
                         modifier = Modifier.weight(1f)
                     )
                 }

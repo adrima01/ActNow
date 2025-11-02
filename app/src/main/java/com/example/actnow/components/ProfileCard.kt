@@ -19,7 +19,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.actnow.R
 import androidx.compose.foundation.border
 import com.example.actnow.utilisateur
 import java.text.SimpleDateFormat
@@ -32,27 +31,29 @@ fun ProfileCard() {
     val sdf = SimpleDateFormat("MMMM yyyy", Locale.FRENCH)
     val formattedDate = sdf.format(utilisateur.date)
 
-    Column(
-        verticalArrangement = Arrangement.spacedBy(20.dp),
-        modifier = Modifier.padding(16.dp)
+    Card(
+        shape = RoundedCornerShape(16.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp)
+            .border(1.dp, Color.Black, shape = RoundedCornerShape(16.dp)),
+        colors = CardDefaults.cardColors(
+            containerColor = Color.White
+        ),
     ) {
-        Card(
-            shape = RoundedCornerShape(16.dp),
+        Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .border(1.dp, Color.Black, shape = RoundedCornerShape(16.dp)),
-            colors = CardDefaults.cardColors(
-                containerColor = Color.White
-            ),
+                .padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(8.dp)
             ) {
                 Image(
-                    painter = painterResource(id = R.drawable.profile_monsieur),
+                    painter = painterResource(id = utilisateur.image),
                     contentDescription = "profile picture",
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
@@ -60,25 +61,25 @@ fun ProfileCard() {
                         .clip(CircleShape)
                 )
 
-                Spacer(modifier = Modifier.width(16.dp))
+                Spacer(modifier = Modifier.width(12.dp))
 
-                Column {
+                Column (
+                    verticalArrangement = Arrangement.spacedBy(16.dp)
+                ) {
                     Text(
                         text = utilisateur.prenom + " " + utilisateur.nom,
                         fontSize = 20.sp,
                         fontWeight = FontWeight.Bold,
-                        modifier = Modifier.padding(8.dp)
                     )
                     Text(
                         text = "Membre depuis $formattedDate",
                         fontSize = 14.sp,
-                        modifier = Modifier.padding(8.dp)
                     )
-                    Row {
+                    Row (
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
                         Card (
                             shape = RoundedCornerShape(16.dp),
-                            modifier = Modifier
-                                .padding(6.dp),
                             colors = CardDefaults.cardColors(
                                 containerColor = Color.Blue.copy(alpha = 0.6f)
                             )
@@ -87,13 +88,12 @@ fun ProfileCard() {
                                 modifier = Modifier
                                     .padding(8.dp),
                                 text = "Super-Bénévole",
-                                color = Color.White
+                                color = Color.White,
+                                fontSize = 14.sp
                             )
                         }
                         Card (
                             shape = RoundedCornerShape(16.dp),
-                            modifier = Modifier
-                                .padding(6.dp),
                             colors = CardDefaults.cardColors(
                                 containerColor = Color.Blue.copy(alpha = 0.6f)
                             )
@@ -102,7 +102,8 @@ fun ProfileCard() {
                                 modifier = Modifier
                                     .padding(8.dp),
                                 text = "${utilisateur.heures}h de bénévolat",
-                                color = Color.White
+                                color = Color.White,
+                                fontSize = 14.sp
                             )
                         }
                     }
@@ -110,8 +111,7 @@ fun ProfileCard() {
             }
             Column(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp),
+                    .fillMaxWidth(),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 Row(
@@ -139,7 +139,6 @@ fun ProfileCard() {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(16.dp)
             ){
                 Text("Progression vers Méga-Bénévole", fontWeight = FontWeight.SemiBold)
                 Spacer(modifier = Modifier.height(8.dp))
@@ -148,7 +147,7 @@ fun ProfileCard() {
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(10.dp),
-                    color = Color.Blue,
+                    color = Color.Blue.copy(alpha = 0.6f),
                     trackColor = Color.LightGray,
                 )
                 Spacer(modifier = Modifier.height(4.dp))

@@ -13,6 +13,7 @@ data class Utilisateur (
     val missionsAVenir: Int,
     val statut: Int,
     val points: Int,
+    val image: Int
 )
 
 val utilisateur = Utilisateur(
@@ -24,5 +25,6 @@ val utilisateur = Utilisateur(
     5,
     2,
     3,
-    125
+    125,
+    R.drawable.profile_monsieur
 )
