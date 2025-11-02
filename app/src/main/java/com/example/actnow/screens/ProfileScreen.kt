@@ -1,32 +1,117 @@
 package com.example.actnow.screens
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Stars
+import androidx.compose.material.icons.filled.Timeline
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.example.actnow.BadgeData
+import com.example.actnow.components.BadgeCard
 import com.example.actnow.components.ProfileCard
+import com.russhwolf.settings.Settings
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProfileScreen() {
-    Scaffold(
-        topBar = {
-            TopAppBar(title = { Text("ActNow") })
+    val settings: Settings = Settings()
+    LazyColumn {
+        item {
+            ProfileCard()
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                modifier = Modifier
+                    .padding(16.dp)
+            ) {
+                Icon(
+                    imageVector = Icons.Filled.Stars,
+                    contentDescription = "Stars Icon",
+                )
+                Text(
+                    text = "Mes badges",
+                    fontSize = 20.sp,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    fontWeight = FontWeight.Bold
+                )
+            }
         }
-    ) { padding ->
-        Column(modifier = Modifier
-            .fillMaxSize()
-            .background(Color.White)
-            .padding(padding)
-        ) {
+        val achievedBadges = BadgeData.badges.filter { it.achieved }
+        items(achievedBadges.chunked(2)) { rowItems ->
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+            ) {
+                rowItems.forEach { badge ->
+                    BadgeCard(
+                        title = badge.titre,
+                        description = badge.description,
+                        image = badge.image,
+                        modifier = Modifier.weight(1f)
+                    )
+                }
+
+                if (rowItems.size == 1) {
+                    Spacer(modifier = Modifier.weight(1f))
+                }
+            }
+        }
+        item {
+
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                modifier = Modifier
+                    .padding(16.dp)
+
+            ) {
+                Icon(
+                    imageVector = Icons.Filled.Timeline,
+                    contentDescription = "Timeline Icon",
+                )
+                Text(
+                    text = "Prochains badges à débloquer",
+                    fontSize = 20.sp,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    fontWeight = FontWeight.Bold
+                )
+            }
+        }
+        val lockedBadges = BadgeData.badges.filter { !it.achieved }
+        items(lockedBadges.chunked(2)) { rowItems ->
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                rowItems.forEach { badge ->
+                    BadgeCard(
+                        title = badge.titre,
+                        description = badge.description,
+                        image = badge.image,
+                        modifier = Modifier.weight(1f)
+                    )
+                }
+
+                if (rowItems.size == 1) {
+                    Spacer(modifier = Modifier.weight(1f))
+                }
+            }
         }
     }
-    ProfileCard()
+
 }
+
