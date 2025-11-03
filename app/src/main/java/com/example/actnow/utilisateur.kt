@@ -1,6 +1,28 @@
 package com.example.actnow
 
-import java.util.Date
+import java.time.LocalDate
+
+enum class Niveau(val titre: String, val heuresRequises: Int) {
+    NOUVEAU("Nouveau bénévole", 0),
+    ACTIF("Bénévole actif", 20),
+    ENGAGÉ("Bénévole engagé", 60),
+    SUPER("Super bénévole", 150),
+    MÉGA("Méga bénévole", 300);
+
+    companion object {
+        fun obtenirNiveauPourHeures(heures: Int): Niveau {
+            return Niveau.entries
+                .filter { it.heuresRequises <= heures }
+                .maxByOrNull { it.heuresRequises } ?: NOUVEAU
+        }
+    }
+
+    fun niveauSuivant(): Niveau? {
+        val tous = Niveau.entries
+        val indexActuel = tous.indexOf(this)
+        return if (indexActuel < tous.lastIndex) tous[indexActuel + 1] else null
+    }
+}
 
 
 data class Utilisateur (
@@ -8,7 +30,7 @@ data class Utilisateur (
     val nom: String,
     val prenom: String,
     val heures: Int,
-    val date: Date,
+    val date: LocalDate,
     val missionsCompletees: Int,
     val missionsAVenir: Int,
     val statut: Int,
@@ -20,8 +42,8 @@ val utilisateur = Utilisateur(
     1,
     "Müller",
     "Thomas",
-    42,
-    java.sql.Date.valueOf("2025-10-05"),
+    100,
+    LocalDate.of(2025, 10, 4),
     5,
     2,
     3,
