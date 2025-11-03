@@ -20,16 +20,27 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.foundation.border
+import com.example.actnow.Niveau
 import com.example.actnow.utilisateur
-import java.text.SimpleDateFormat
+import java.time.format.DateTimeFormatter
 import java.util.Locale
 
 
 
 @Composable
 fun ProfileCard() {
-    val sdf = SimpleDateFormat("MMMM yyyy", Locale.FRENCH)
-    val formattedDate = sdf.format(utilisateur.date)
+    val formatter = DateTimeFormatter.ofPattern("MMMM yyyy", Locale.FRENCH)
+    val formattedDate = utilisateur.date.format(formatter)
+    val niveauActuel = Niveau.obtenirNiveauPourHeures(utilisateur.heures)
+    val niveauSuivant = niveauActuel.niveauSuivant()
+
+    val pourcentage: Float = if (niveauSuivant != null) {
+        ((utilisateur.heures - niveauActuel.heuresRequises).toFloat() /
+                (niveauSuivant.heuresRequises - niveauActuel.heuresRequises))
+            .coerceIn(0f, 1f)
+    } else {
+        1f
+    }
 
     Card(
         shape = RoundedCornerShape(16.dp),
@@ -45,7 +56,7 @@ fun ProfileCard() {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+            verticalArrangement = Arrangement.spacedBy(20.dp)
         ) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
@@ -68,7 +79,7 @@ fun ProfileCard() {
                 ) {
                     Text(
                         text = utilisateur.prenom + " " + utilisateur.nom,
-                        fontSize = 20.sp,
+                        fontSize = 16.sp,
                         fontWeight = FontWeight.Bold,
                     )
                     Text(
@@ -87,7 +98,7 @@ fun ProfileCard() {
                             Text(
                                 modifier = Modifier
                                     .padding(8.dp),
-                                text = "Super-Bénévole",
+                                text = niveauActuel.titre,
                                 color = Color.White,
                                 fontSize = 14.sp
                             )
@@ -140,10 +151,10 @@ fun ProfileCard() {
                 modifier = Modifier
                     .fillMaxWidth()
             ){
-                Text("Progression vers Méga-Bénévole", fontWeight = FontWeight.SemiBold)
+                Text("Progression vers ${niveauSuivant?.titre}", fontWeight = FontWeight.SemiBold)
                 Spacer(modifier = Modifier.height(8.dp))
                 LinearProgressIndicator(
-                    progress = { 0.75f },
+                    progress = { pourcentage },
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(10.dp),
@@ -151,7 +162,7 @@ fun ProfileCard() {
                     trackColor = Color.LightGray,
                 )
                 Spacer(modifier = Modifier.height(4.dp))
-                Text("75 %", fontSize = 12.sp)
+                Text("${(pourcentage * 100).toInt()} %", fontSize = 12.sp)
             }
         }
     }
