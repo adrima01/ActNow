@@ -17,7 +17,8 @@ data class SingleMissionDto (
     val description: String,
     val nombreParticipants: Int,
     val récompenses: String,
-    val imageUrl: String
+    val imageUrl: String,
+    val adresse: Adresse
 )
 
 val missionData = MissionDto(
@@ -39,7 +40,12 @@ val missionData = MissionDto(
                     "Chaque geste compte, et ensemble, nous pouvons créer un événement chaleureux, festif et engagé.",
             nombreParticipants = 12,
             récompenses = "10 XP",
-            imageUrl = "https://www.voyageavecvue.com/wp-content/uploads/2022/11/Vignettes-pour-les-Categories-7.png"
+            imageUrl = "https://www.voyageavecvue.com/wp-content/uploads/2022/11/Vignettes-pour-les-Categories-7.png",
+            adresse = Adresse(rue = "Rue Madame de Staël",
+                numero = "22",
+                codePostal = "57070",
+                ville = "Metz",
+                pays = "France"),
         ),
         SingleMissionDto(
             id = 2,
@@ -53,7 +59,14 @@ val missionData = MissionDto(
                     "Aucun prérequis nécessaire, juste votre bonne humeur et vos gants de jardinage !",
             nombreParticipants = 20,
             récompenses = "15 XP",
-            imageUrl = "https://cdn.pixabay.com/photo/2017/03/12/20/06/planting-2139705_1280.jpg"
+            imageUrl = "https://cdn.pixabay.com/photo/2017/03/12/20/06/planting-2139705_1280.jpg",
+            adresse = Adresse(
+                rue = "Rue Saint-Livier",
+                numero = "29",
+                codePostal = "57000",
+                ville = "Metz",
+                pays = "France"
+            )
         ),
         SingleMissionDto(
             id = 3,
@@ -66,7 +79,14 @@ val missionData = MissionDto(
                     "Lecture, musique, discussions, jeux de société : toutes les bonnes volontés sont bienvenues pour apporter un moment de joie et de compagnie.",
             nombreParticipants = 8,
             récompenses = "12 XP",
-            imageUrl = "https://cdn.pixabay.com/photo/2016/03/23/18/42/elderly-1273124_1280.jpg"
+            imageUrl = "https://cdn.pixabay.com/photo/2016/03/23/18/42/elderly-1273124_1280.jpg",
+            adresse = Adresse(
+                rue = "Rue Paul Michaux",
+                numero = "4bis",
+                codePostal = "57000",
+                ville = "Metz",
+                pays = "France"
+            )
         ),
         SingleMissionDto(
             id = 4,
@@ -79,7 +99,14 @@ val missionData = MissionDto(
                     "Sacs, gants et bonne humeur fournis ! Ensemble, protégeons nos littoraux et sensibilisons à la réduction des déchets.",
             nombreParticipants = 25,
             récompenses = "20 XP",
-            imageUrl = "https://cdn.pixabay.com/photo/2018/03/26/09/40/beach-clean-up-3266066_1280.jpg"
+            imageUrl = "https://cdn.pixabay.com/photo/2018/03/26/09/40/beach-clean-up-3266066_1280.jpg",
+            adresse = Adresse(
+                rue = "Rue aux Ossons",
+                numero = "2",
+                codePostal = "57000",
+                ville = "Metz",
+                pays = "France"
+            )
         ),
         SingleMissionDto(
             id = 5,
@@ -92,7 +119,14 @@ val missionData = MissionDto(
             "Aidez-les à exprimer leur créativité à travers les couleurs et participez à la mise en place de leur exposition de fin d’année.",
             nombreParticipants = 10,
             récompenses = "10 XP",
-            imageUrl = "https://cdn.pixabay.com/photo/2016/03/27/22/22/children-1284662_1280.jpg"
+            imageUrl = "https://cdn.pixabay.com/photo/2016/03/27/22/22/children-1284662_1280.jpg",
+            adresse = Adresse(
+                rue = "En Nexirue",
+                numero = "17",
+                codePostal = "57000",
+                ville = "Metz",
+                pays = "France"
+            )
         ),
         SingleMissionDto(
             id = 6,
@@ -106,7 +140,14 @@ val missionData = MissionDto(
             "Un moment fort de partage et d’humanité avant les fêtes !",
             nombreParticipants = 15,
             récompenses = "18 XP",
-            imageUrl = "https://cdn.pixabay.com/photo/2018/04/11/22/26/soup-3313778_1280.jpg"
+            imageUrl = "https://cdn.pixabay.com/photo/2018/04/11/22/26/soup-3313778_1280.jpg",
+            adresse = Adresse(
+                rue = "Rue Saint-Etienne",
+                numero = "5",
+                codePostal = "57140",
+                ville = "Woippy",
+                pays = "France"
+            )
         ),
         SingleMissionDto(
             id = 7,
@@ -119,7 +160,14 @@ val missionData = MissionDto(
             "Apprenez les bases de la communication gestuelle et découvrez comment mieux interagir avec les personnes sourdes au quotidien.",
             nombreParticipants = 20,
             récompenses = "15 XP",
-            imageUrl = "https://cdn.pixabay.com/photo/2020/02/13/20/33/sign-language-4845961_1280.jpg"
+            imageUrl = "https://cdn.pixabay.com/photo/2020/02/13/20/33/sign-language-4845961_1280.jpg",
+            adresse = Adresse(
+                rue = "Rue des Jardins",
+                numero = "27",
+                codePostal = "57000",
+                ville = "Metz",
+                pays = "France"
+            )
         ),
         SingleMissionDto(
             id = 8,
@@ -132,7 +180,14 @@ val missionData = MissionDto(
             "Les bénévoles aideront à accueillir le public, présenter les animaux et sensibiliser sur la cause animale.",
             nombreParticipants = 12,
             récompenses = "14 XP",
-            imageUrl = "https://cdn.pixabay.com/photo/2017/03/28/12/10/dog-2187484_1280.jpg"
+            imageUrl = "https://cdn.pixabay.com/photo/2017/03/28/12/10/dog-2187484_1280.jpg",
+            adresse = Adresse(
+                rue = "Rue de la Charmille",
+                numero = "13",
+                codePostal = "57155",
+                ville = "Marly",
+                pays = "France"
+            )
         )
     )
 )
