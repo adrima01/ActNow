@@ -3,7 +3,6 @@ package com.example.actnow.screens
 import android.content.Context
 import android.location.Geocoder
 import androidx.compose.foundation.layout.Box
-import androidx.preference.PreferenceManager
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -16,10 +15,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
+import com.example.actnow.SingleMissionDto
 import com.example.actnow.missionData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import org.osmdroid.config.Configuration
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
 import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.MapView
@@ -33,68 +32,126 @@ import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay
 
 
 @Composable
-fun MapScreen() {
-    val context = LocalContext.current
+fun MapScreenWrapper() {
+    var selectedMission by remember { mutableStateOf<SingleMissionDto?>(null) }
+    var lastSelectedMission by remember { mutableStateOf<SingleMissionDto?>(null) }
 
-    val geoPoints by produceState(initialValue = emptyList<GeoPoint>(), key1 = missionData.missions) {
-        value = geocodeAddresses(
-            context,
-            missionData.missions.map {
-                "${it.adresse.rue} ${it.adresse.numero}, ${it.adresse.codePostal} ${it.adresse.ville}"
+    if (selectedMission == null) {
+        MapScreen(
+            lastSelectedMission = lastSelectedMission,
+            onSelectMission = { mission ->
+                selectedMission = mission
+                lastSelectedMission = mission
             }
         )
+    } else {
+        DetailsScreen(
+            mission = selectedMission!!,
+            onBack = { selectedMission = null }
+        )
     }
+}
+
+@Composable
+fun MapScreen(
+    lastSelectedMission: SingleMissionDto?,
+    onSelectMission: (SingleMissionDto) -> Unit
+) {
+    val context = LocalContext.current
 
     val mapView = remember {
         MapView(context).apply {
             setTileSource(TileSourceFactory.MAPNIK)
             setMultiTouchControls(true)
             controller.setZoom(9.5)
-            controller.setCenter(GeoPoint(48.8583, 2.2944)) // Startpunkt: Eiffelturm
+            controller.setCenter(GeoPoint(48.8583, 2.2944))
 
             overlays.add(RotationGestureOverlay(this).apply { isEnabled = true })
-
             overlays.add(CompassOverlay(context, InternalCompassOrientationProvider(context), this).apply { enableCompass() })
-
-            val locationOverlay = MyLocationNewOverlay(GpsMyLocationProvider(context), this).apply {
+            overlays.add(MyLocationNewOverlay(GpsMyLocationProvider(context), this).apply {
                 enableMyLocation()
                 runOnFirstFix {
                     myLocation?.let { controller.setCenter(GeoPoint(it.latitude, it.longitude)) }
                     controller.setZoom(16.0)
                 }
-            }
-            overlays.add(locationOverlay)
+            })
         }
     }
 
-    LaunchedEffect(geoPoints) {
-        if (geoPoints.isNotEmpty()) {
-            val overlay = ItemizedIconOverlay(
-                geoPoints.map { OverlayItem("Mission", "", it) },
+    val missionGeoPoints by produceState(initialValue = emptyList<Pair<SingleMissionDto, GeoPoint>>(), key1 = missionData.missions) {
+        val result = mutableListOf<Pair<SingleMissionDto, GeoPoint>>()
+        for (mission in missionData.missions) {
+            val address = "${mission.adresse.rue} ${mission.adresse.numero}, ${mission.adresse.codePostal} ${mission.adresse.ville}"
+            val geo = geocodeAddresses(context, listOf(address)).firstOrNull()
+            if (geo != null) result.add(mission to geo)
+        }
+        value = result
+    }
+
+    LaunchedEffect(missionGeoPoints, lastSelectedMission) {
+        if (missionGeoPoints.isNotEmpty()) {
+
+            val defaultMarker = context.getDrawable(org.osmdroid.library.R.drawable.marker_default)?.apply {
+                setBounds(0, 0, intrinsicWidth, intrinsicHeight)
+            }
+
+            val selectedMarker = context.getDrawable(org.osmdroid.library.R.drawable.marker_default)?.apply {
+                setBounds(0, 0, intrinsicWidth, intrinsicHeight)
+                setColorFilter(android.graphics.Color.BLUE, android.graphics.PorterDuff.Mode.SRC_IN)
+            }
+
+            val overlayItems = missionGeoPoints.map { (mission, geo) ->
+                OverlayItem(mission.titre, "", geo).apply {
+                    setMarker(if (mission == lastSelectedMission) selectedMarker else defaultMarker)
+                }
+            }
+
+            val overlay = ItemizedIconOverlay<OverlayItem>(
+                overlayItems,
                 object : ItemizedIconOverlay.OnItemGestureListener<OverlayItem> {
-                    override fun onItemSingleTapUp(index: Int, item: OverlayItem) = true
+                    override fun onItemSingleTapUp(index: Int, item: OverlayItem): Boolean {
+                        val (mission, _) = missionGeoPoints[index]
+                        onSelectMission(mission)
+                        return true
+                    }
+
                     override fun onItemLongPress(index: Int, item: OverlayItem) = false
                 },
                 context
             )
+
+            val preservedOverlays = mapView.overlays.filter { it !is ItemizedIconOverlay<*> }
+            mapView.overlays.clear()
+            mapView.overlays.addAll(preservedOverlays)
             mapView.overlays.add(overlay)
 
-            val north = geoPoints.maxOf { it.latitude }
-            val south = geoPoints.minOf { it.latitude }
-            val east = geoPoints.maxOf { it.longitude }
-            val west = geoPoints.minOf { it.longitude }
-            mapView.zoomToBoundingBox(org.osmdroid.util.BoundingBox(north, east, south, west), true)
+            lastSelectedMission?.let { mission ->
+                val geo = missionGeoPoints.find { it.first == mission }?.second
+                geo?.let {
+                    mapView.controller.setCenter(it)
+                    mapView.controller.setZoom(16.0)
+                }
+            } ?: run {
+                val north = missionGeoPoints.maxOf { it.second.latitude }
+                val south = missionGeoPoints.minOf { it.second.latitude }
+                val east = missionGeoPoints.maxOf { it.second.longitude }
+                val west = missionGeoPoints.minOf { it.second.longitude }
+                mapView.zoomToBoundingBox(org.osmdroid.util.BoundingBox(north, east, south, west), true)
+            }
         }
     }
 
-    DisposableEffect(Unit) {
+
+    DisposableEffect(mapView) {
+        mapView.onResume()
+
         onDispose {
             mapView.onPause()
             mapView.onDetach()
         }
     }
 
-    Box(Modifier.fillMaxSize()) {
+    Box(modifier = Modifier.fillMaxSize()) {
         AndroidView(factory = { mapView }, modifier = Modifier.fillMaxSize())
 
         Button(

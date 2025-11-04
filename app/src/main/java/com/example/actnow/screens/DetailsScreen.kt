@@ -1,5 +1,6 @@
 package com.example.actnow.screens
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -39,6 +40,7 @@ fun DetailsScreen(mission: SingleMissionDto, onBack: () -> Unit) {
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp)
+            .background(MaterialTheme.colorScheme.background)
     ) {
         Column(
             modifier = Modifier

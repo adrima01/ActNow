@@ -45,7 +45,7 @@ fun MainScreen() {
         ) {
             when (selectedItem) {
                 0 -> MissionScreen()
-                1 -> MapScreen()
+                1 -> MapScreenWrapper()
                 2 -> ProfileScreen()
             }
         }

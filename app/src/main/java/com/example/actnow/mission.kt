@@ -16,9 +16,10 @@ data class SingleMissionDto (
     val lieu: String,
     val description: String,
     val nombreParticipants: Int,
-    val récompenses: String,
-    val imageUrl: String,
-    val adresse: Adresse
+    val recompenses: List<String>,
+    val imageName: String,
+    val adresse: Adresse,
+    val participantsImages: List<String>
 )
 
 val missionData = MissionDto(
@@ -39,13 +40,14 @@ val missionData = MissionDto(
                     "ou encore prêter main-forte pour les animations.\n" +
                     "Chaque geste compte, et ensemble, nous pouvons créer un événement chaleureux, festif et engagé.",
             nombreParticipants = 12,
-            récompenses = "10 XP",
-            imageUrl = "https://www.voyageavecvue.com/wp-content/uploads/2022/11/Vignettes-pour-les-Categories-7.png",
+            recompenses = listOf("🎁 10 XP", "📜 Certificat de participation", "☕ Boisson chaude offerte"),
+            imageName = "marchenoel",
             adresse = Adresse(rue = "Rue Madame de Staël",
                 numero = "22",
                 codePostal = "57070",
                 ville = "Metz",
                 pays = "France"),
+            participantsImages = listOf("avatar1", "avatar2", "avatar3")
         ),
         SingleMissionDto(
             id = 2,
@@ -58,15 +60,16 @@ val missionData = MissionDto(
                     "Au programme : préparation du sol, plantation d’arbres et de fleurs locales, et sensibilisation à la biodiversité. " +
                     "Aucun prérequis nécessaire, juste votre bonne humeur et vos gants de jardinage !",
             nombreParticipants = 20,
-            récompenses = "15 XP",
-            imageUrl = "https://cdn.pixabay.com/photo/2017/03/12/20/06/planting-2139705_1280.jpg",
+            recompenses = listOf("🌱 15 XP", "🥇 Badge Éco-Citoyen", "🚰 Bouteille réutilisable offerte"),
+            imageName = "plantationprintemps",
             adresse = Adresse(
                 rue = "Rue Saint-Livier",
                 numero = "29",
                 codePostal = "57000",
                 ville = "Metz",
                 pays = "France"
-            )
+            ),
+            participantsImages = listOf("avatar1", "avatar2", "avatar3")
         ),
         SingleMissionDto(
             id = 3,
@@ -78,15 +81,16 @@ val missionData = MissionDto(
             description = "L’association Sourires Solidaires organise un après-midi de partage avec les résidents de la maison de retraite Les Amandiers. 💕 " +
                     "Lecture, musique, discussions, jeux de société : toutes les bonnes volontés sont bienvenues pour apporter un moment de joie et de compagnie.",
             nombreParticipants = 8,
-            récompenses = "12 XP",
-            imageUrl = "https://cdn.pixabay.com/photo/2016/03/23/18/42/elderly-1273124_1280.jpg",
+            recompenses = listOf("🧤 12 XP", "📜 Certificat d'engagement", "🎁 Goodie bag"),
+            imageName = "retraite",
             adresse = Adresse(
                 rue = "Rue Paul Michaux",
                 numero = "4bis",
                 codePostal = "57000",
                 ville = "Metz",
                 pays = "France"
-            )
+            ),
+            participantsImages = listOf("avatar1", "avatar2", "avatar3")
         ),
         SingleMissionDto(
             id = 4,
@@ -98,15 +102,16 @@ val missionData = MissionDto(
             description = "Les Gardiens de l’Océan vous invitent à participer à une grande opération de nettoyage de plage à l’occasion de la Journée Mondiale des Océans 🌊. " +
                     "Sacs, gants et bonne humeur fournis ! Ensemble, protégeons nos littoraux et sensibilisons à la réduction des déchets.",
             nombreParticipants = 25,
-            récompenses = "20 XP",
-            imageUrl = "https://cdn.pixabay.com/photo/2018/03/26/09/40/beach-clean-up-3266066_1280.jpg",
+            recompenses = listOf("🧤 12 XP", "📜 Certificat d'engagement", "🎁 Goodie bag"),
+            imageName = "nettoyage",
             adresse = Adresse(
                 rue = "Rue aux Ossons",
                 numero = "2",
                 codePostal = "57000",
                 ville = "Metz",
                 pays = "France"
-            )
+            ),
+            participantsImages = listOf("avatar1", "avatar2", "avatar3")
         ),
         SingleMissionDto(
             id = 5,
@@ -118,15 +123,16 @@ val missionData = MissionDto(
             description = "Les Petits Artistes recherchent des bénévoles pour encadrer un atelier de peinture avec des enfants de 6 à 10 ans 🎨. " +
             "Aidez-les à exprimer leur créativité à travers les couleurs et participez à la mise en place de leur exposition de fin d’année.",
             nombreParticipants = 10,
-            récompenses = "10 XP",
-            imageUrl = "https://cdn.pixabay.com/photo/2016/03/27/22/22/children-1284662_1280.jpg",
+            recompenses = listOf("📚 15 XP", "🧸 Badge Bienveillance", "🍪 Goûter offert"),
+            imageName = "peinture",
             adresse = Adresse(
                 rue = "En Nexirue",
                 numero = "17",
                 codePostal = "57000",
                 ville = "Metz",
                 pays = "France"
-            )
+            ),
+            participantsImages = listOf("avatar1", "avatar2", "avatar3")
         ),
         SingleMissionDto(
             id = 6,
@@ -139,15 +145,16 @@ val missionData = MissionDto(
             "Les bénévoles aideront à la préparation, la distribution et l’accueil des bénéficiaires. " +
             "Un moment fort de partage et d’humanité avant les fêtes !",
             nombreParticipants = 15,
-            récompenses = "18 XP",
-            imageUrl = "https://cdn.pixabay.com/photo/2018/04/11/22/26/soup-3313778_1280.jpg",
+            recompenses = listOf("🌳 25 XP", "🌎 Badge Nature", "🎖️ Certificat Éco-Acteur"),
+            imageName = "repas",
             adresse = Adresse(
                 rue = "Rue Saint-Etienne",
                 numero = "5",
                 codePostal = "57140",
                 ville = "Woippy",
                 pays = "France"
-            )
+            ),
+            participantsImages = listOf("avatar1", "avatar2", "avatar3")
         ),
         SingleMissionDto(
             id = 7,
@@ -159,15 +166,16 @@ val missionData = MissionDto(
             description = "Participez à un atelier d’initiation à la langue des signes avec Aide & Sourds France 🤟. " +
             "Apprenez les bases de la communication gestuelle et découvrez comment mieux interagir avec les personnes sourdes au quotidien.",
             nombreParticipants = 20,
-            récompenses = "15 XP",
-            imageUrl = "https://cdn.pixabay.com/photo/2020/02/13/20/33/sign-language-4845961_1280.jpg",
+            recompenses = listOf("✏️ 10 XP", "⭐ Badge Éducation", "📜 Attestation de tutorat"),
+            imageName = "signes",
             adresse = Adresse(
                 rue = "Rue des Jardins",
                 numero = "27",
                 codePostal = "57000",
                 ville = "Metz",
                 pays = "France"
-            )
+            ),
+            participantsImages = listOf("avatar1", "avatar2", "avatar3")
         ),
         SingleMissionDto(
             id = 8,
@@ -177,17 +185,18 @@ val missionData = MissionDto(
             heure = Time.valueOf("11:00:00"),
             lieu = "Metz",
             description = "Le Refuge Animalier du Soleil organise une grande journée d’adoption ! 🐾 " +
-            "Les bénévoles aideront à accueillir le public, présenter les animaux et sensibiliser sur la cause animale.",
+                    "Les bénévoles aideront à accueillir le public, présenter les animaux et sensibiliser sur la cause animale.",
             nombreParticipants = 12,
-            récompenses = "14 XP",
-            imageUrl = "https://cdn.pixabay.com/photo/2017/03/28/12/10/dog-2187484_1280.jpg",
+            recompenses = listOf("🥾 30 XP", "🎽 T-shirt de l’événement", "🏅 Badge Marche Solidaire"),
+            imageName = "adoption",
             adresse = Adresse(
                 rue = "Rue de la Charmille",
                 numero = "13",
                 codePostal = "57155",
                 ville = "Marly",
                 pays = "France"
-            )
+            ),
+            participantsImages = listOf("avatar1", "avatar2", "avatar3")
         )
     )
 )
