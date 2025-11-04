@@ -1,6 +1,6 @@
 package com.example.actnow.screens
 
-import android.preference.PreferenceManager
+import androidx.preference.PreferenceManager
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -8,6 +8,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.viewinterop.AndroidView
 import org.osmdroid.config.Configuration
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
+import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.MapView
 import org.osmdroid.views.overlay.compass.CompassOverlay
 import org.osmdroid.views.overlay.compass.InternalCompassOrientationProvider
@@ -42,9 +43,22 @@ fun MapScreen() {
             compassOverlay.enableCompass()
             overlays.add(compassOverlay)
 
-            val locationOverlay = MyLocationNewOverlay(GpsMyLocationProvider(context), this)
-            locationOverlay.enableMyLocation()
+            val locationOverlay = MyLocationNewOverlay(GpsMyLocationProvider(context), this).apply {
+                enableMyLocation()
+
+                runOnFirstFix {
+                    val location = myLocation
+                    if (location != null) {
+                        controller.setCenter(GeoPoint(location.latitude, location.longitude))
+                        controller.setZoom(16.0) // Optional: Zoom anpassen
+                    }
+                }
+            }
             overlays.add(locationOverlay)
+
+            controller.setZoom(9.5)
+            val startPoint = GeoPoint(48.8583, 2.2944)
+            controller.setCenter(startPoint)
         }
     }
 
