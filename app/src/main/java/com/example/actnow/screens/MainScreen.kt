@@ -5,11 +5,10 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.material.icons.Icons
-import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.CalendarToday
 import androidx.compose.material.icons.filled.Map
-
+import androidx.compose.foundation.layout.*
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -24,9 +23,7 @@ fun MainScreen() {
 
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = { Text("ActNow") }
-            )
+            TopAppBar(title = { Text("ActNow") })
         },
         bottomBar = {
             NavigationBar {
