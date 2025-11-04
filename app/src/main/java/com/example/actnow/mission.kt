@@ -132,7 +132,7 @@ val missionData = MissionDto(
             "Les bénévoles aideront à accueillir le public, présenter les animaux et sensibiliser sur la cause animale.",
             nombreParticipants = 12,
             récompenses = "14 XP",
-            imageUrl = "https://cdn.pixabay.com/photo/2017/03/28/12/10/dog-2187484_1280.jpg"
+            imageUrl = "https://cdn.pixabay.com/photo/2017/03/28/12/10/dog-2187484_1280.jpg" 
         )
     )
 )
