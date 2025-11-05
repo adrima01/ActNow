@@ -60,7 +60,15 @@ fun MainScreen(navController: NavHostController) {
             }
 
             composable("profile") {
-                ProfileScreen()
+                ProfileScreen(navController)
+            }
+
+            composable("next_Missions") {
+                NextMissionsScreen(navController)
+            }
+
+            composable("last_Missions") {
+                LastMissionsScreen(navController)
             }
         }
     }
@@ -74,5 +82,5 @@ enum class Destination(
 ) {
     MISSION("missions", "Missions", Icons.Filled.CalendarToday, "Missions"),
     MAP("map", "Carte", Icons.Filled.Map, "Carte"),
-    PROFILE("profile", "Profile", Icons.Filled.AccountCircle, "Profile")
+    PROFILE("profile", "Profile", Icons.Filled.AccountCircle, "Profile"),
 }

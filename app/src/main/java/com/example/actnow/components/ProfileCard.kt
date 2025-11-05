@@ -29,7 +29,7 @@ import java.util.Locale
 
 
 @Composable
-fun ProfileCard( navController: NavController) {
+fun ProfileCard(navController: NavController) {
     val formatter = DateTimeFormatter.ofPattern("MMMM yyyy", Locale.FRENCH)
     val formattedDate = utilisateur.date.format(formatter)
     val niveauActuel = Niveau.obtenirNiveauPourHeures(utilisateur.heures)
@@ -137,7 +137,9 @@ fun ProfileCard( navController: NavController) {
                         icon = Icons.Filled.Done,
                         iconDescription = "Done Icon",
                         color = Color.Green,
-                        onClick = {}
+                        onClick = {
+                            navController.navigate("last_missions")
+                        }
                     )
                     StatCard(
                         title = "Missions à venir",
@@ -146,7 +148,9 @@ fun ProfileCard( navController: NavController) {
                         icon = Icons.Filled.DateRange,
                         iconDescription = "Date Icon",
                         color = Color.Magenta,
-                        onClick = {}
+                        onClick = {
+                            navController.navigate("next_missions")
+                        }
                     )
                 }
             }
