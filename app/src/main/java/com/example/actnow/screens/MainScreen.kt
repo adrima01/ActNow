@@ -9,17 +9,17 @@ import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.CalendarToday
 import androidx.compose.material.icons.filled.Map
 import androidx.compose.foundation.layout.*
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainScreen() {
-    var selectedItem by remember { mutableStateOf(0) }
+fun MainScreen(navController: NavHostController) {
 
-    val items = listOf(
-        NavItem("Missions", Icons.Filled.CalendarToday),
-        NavItem("Carte", Icons.Filled.Map),
-        NavItem("Profile", Icons.Filled.AccountCircle)
-    )
+    val startDestination = Destination.MISSION
+    var selectedDestination by rememberSaveable { mutableIntStateOf(startDestination.ordinal) }
 
     Scaffold(
         topBar = {
@@ -27,29 +27,52 @@ fun MainScreen() {
         },
         bottomBar = {
             NavigationBar {
-                items.forEachIndexed { index, item ->
+                Destination.entries.forEachIndexed { index, destination ->
                     NavigationBarItem(
-                        selected = selectedItem == index,
-                        onClick = { selectedItem = index },
-                        icon = { Icon(item.icon, contentDescription = item.title) },
-                        label = { Text(item.title) }
+                        selected = selectedDestination == index,
+                        onClick = {
+                            navController.navigate(route = destination.route)
+                            selectedDestination = index
+                        },
+                        icon = {
+                            Icon(
+                                destination.icon,
+                                contentDescription = destination.contentDescription
+                            )
+                        },
+                        label = { Text(destination.label) }
                     )
                 }
             }
         }
-    ) { innerPadding ->
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding)
+    ) { contentPadding ->
+        NavHost(
+            navController = navController,
+            startDestination = "missions",
+            modifier = Modifier.padding(contentPadding)
         ) {
-            when (selectedItem) {
-                0 -> MissionScreen()
-                1 -> MapScreen()
-                2 -> ProfileScreen()
+            composable("missions") {
+                MissionScreen()
+            }
+
+            composable("map") {
+                MapScreen()
+            }
+
+            composable("profile") {
+                ProfileScreen()
             }
         }
     }
 }
 
-data class NavItem(val title: String, val icon: ImageVector)
+enum class Destination(
+    val route: String,
+    val label: String,
+    val icon: ImageVector,
+    val contentDescription: String
+) {
+    MISSION("missions", "Missions", Icons.Filled.CalendarToday, "Missions"),
+    MAP("map", "Carte", Icons.Filled.Map, "Carte"),
+    PROFILE("profile", "Profile", Icons.Filled.AccountCircle, "Profile")
+}

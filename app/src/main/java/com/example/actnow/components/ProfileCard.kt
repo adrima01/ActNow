@@ -20,6 +20,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.foundation.border
+import androidx.navigation.NavController
 import com.example.actnow.Niveau
 import com.example.actnow.utilisateur
 import java.time.format.DateTimeFormatter
@@ -28,7 +29,7 @@ import java.util.Locale
 
 
 @Composable
-fun ProfileCard() {
+fun ProfileCard( navController: NavController) {
     val formatter = DateTimeFormatter.ofPattern("MMMM yyyy", Locale.FRENCH)
     val formattedDate = utilisateur.date.format(formatter)
     val niveauActuel = Niveau.obtenirNiveauPourHeures(utilisateur.heures)
