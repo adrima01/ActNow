@@ -13,17 +13,22 @@ import androidx.compose.material3.TextField
 import androidx.compose.ui.graphics.Color
 
 @Composable
-fun MissionSearchBar(value: TextFieldValue, onValueChange: (TextFieldValue) -> Unit) {
+fun MissionSearchBar(
+    value: TextFieldValue,
+    onValueChange: (TextFieldValue) -> Unit,
+    modifier: Modifier = Modifier
+) {
     TextField(
         value = value,
         onValueChange = onValueChange,
-        modifier = Modifier.fillMaxWidth(),
+        modifier = modifier,
         placeholder = { Text("Rechercher une mission") },
+        singleLine = true,
         colors = TextFieldDefaults.colors(
             focusedContainerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.8F),
             unfocusedContainerColor = MaterialTheme.colorScheme.primary,
             focusedPlaceholderColor = Color.Gray,
-            unfocusedPlaceholderColor =  Color.Gray,
+            unfocusedPlaceholderColor = Color.Gray,
             focusedTextColor = MaterialTheme.colorScheme.onPrimary,
             unfocusedTextColor = MaterialTheme.colorScheme.onPrimary,
             focusedIndicatorColor = MaterialTheme.colorScheme.onPrimary,
@@ -33,13 +38,15 @@ fun MissionSearchBar(value: TextFieldValue, onValueChange: (TextFieldValue) -> U
             focusedTrailingIconColor = MaterialTheme.colorScheme.onPrimary,
             unfocusedTrailingIconColor = MaterialTheme.colorScheme.onPrimary,
         ),
-        leadingIcon = { Icon(imageVector = Icons.Filled.Search, contentDescription = Icons.Filled.Search.toString()) },
+        leadingIcon = { Icon(imageVector = Icons.Filled.Search, contentDescription = "Rechercher") },
         trailingIcon = {
             if (value.text.isNotEmpty()) {
-                Icon(imageVector = Icons.Filled.Close, contentDescription = Icons.Filled.Close.toString(),
-                    Modifier.clickable { onValueChange(TextFieldValue("")) })
+                Icon(
+                    imageVector = Icons.Filled.Close,
+                    contentDescription = "Effacer",
+                    modifier = Modifier.clickable { onValueChange(TextFieldValue("")) }
+                )
             }
-
         }
     )
 }

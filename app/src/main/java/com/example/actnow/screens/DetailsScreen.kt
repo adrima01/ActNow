@@ -145,9 +145,12 @@ fun DetailsScreen(mission: SingleMissionDto, onBack: () -> Unit) {
 
         }
         ParticiperButton(
+            missionId = mission.id,
             modifier = Modifier
                 .align(Alignment.BottomCenter)
-                .fillMaxWidth()
+                .fillMaxWidth(),
+            onParticipationChange = { /*rafraichir?*/ }
         )
+
     }
 }

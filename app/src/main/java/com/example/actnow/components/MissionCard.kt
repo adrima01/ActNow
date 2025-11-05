@@ -1,5 +1,6 @@
 package com.example.actnow.components
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -11,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
@@ -19,25 +21,29 @@ import com.example.actnow.SingleMissionDto
 import java.text.SimpleDateFormat
 import java.util.*
 
-
-
+@SuppressLint("LocalContextResourcesRead")
 @Composable
-fun MissionCard(mission: SingleMissionDto, onClick: () -> Unit) {
+fun MissionCard(
+    mission: SingleMissionDto,
+    onClick: () -> Unit,
+    isParticipating: Boolean = false
+) {
     val context = LocalContext.current
     val imageResId = context.resources.getIdentifier(
         mission.imageName,
         "drawable",
         context.packageName
     )
+
+    val borderColor = if (isParticipating) Color(0xFF4CAF50) else MaterialTheme.colorScheme.outline
+
     ElevatedCard(
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 8.dp, vertical = 4.dp)
-            .shadow(4.dp, RoundedCornerShape(16.dp))
-            .border(1.dp, MaterialTheme.colorScheme.outline, RoundedCornerShape(16.dp)) // 👈 Bordure visible
+            .border(2.dp, if (isParticipating) Color(0xFF4CAF50) else MaterialTheme.colorScheme.outline, RoundedCornerShape(16.dp))
             .clip(RoundedCornerShape(16.dp))
             .clickable { onClick() },
-
         colors = CardDefaults.elevatedCardColors(
             containerColor = MaterialTheme.colorScheme.surface
         )
@@ -49,7 +55,7 @@ fun MissionCard(mission: SingleMissionDto, onClick: () -> Unit) {
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            // infos mission
+            // Infos mission
             Column(
                 modifier = Modifier
                     .weight(1f)
@@ -80,9 +86,9 @@ fun MissionCard(mission: SingleMissionDto, onClick: () -> Unit) {
                 )
             }
 
-            // image
+            // Image
             AsyncImage(
-                model = imageResId,               // ID drawable direct
+                model = imageResId,
                 contentDescription = mission.titre,
                 modifier = Modifier
                     .size(100.dp)
