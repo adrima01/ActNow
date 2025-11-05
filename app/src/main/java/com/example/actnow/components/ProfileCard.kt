@@ -135,7 +135,8 @@ fun ProfileCard() {
                         modifier = Modifier.weight(1f),
                         icon = Icons.Filled.Done,
                         iconDescription = "Done Icon",
-                        color = Color.Green
+                        color = Color.Green,
+                        onClick = {}
                     )
                     StatCard(
                         title = "Missions à venir",
@@ -143,7 +144,8 @@ fun ProfileCard() {
                         modifier = Modifier.weight(1f),
                         icon = Icons.Filled.DateRange,
                         iconDescription = "Date Icon",
-                        color = Color.Magenta
+                        color = Color.Magenta,
+                        onClick = {}
                     )
                 }
             }
