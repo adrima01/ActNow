@@ -1,5 +1,6 @@
 package com.example.actnow.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -25,7 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun StatCard(title: String, value: Int, modifier: Modifier = Modifier, icon: ImageVector, iconDescription: String, color: Color) {
+fun StatCard(title: String, value: Int, modifier: Modifier = Modifier, icon: ImageVector, iconDescription: String, color: Color, onClick: () -> Unit) {
     Card(
         modifier = modifier
             .height(100.dp),
@@ -37,7 +38,8 @@ fun StatCard(title: String, value: Int, modifier: Modifier = Modifier, icon: Ima
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(8.dp),
+                .padding(8.dp)
+                .clickable { onClick() },
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {

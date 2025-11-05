@@ -20,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.actnow.BadgeData
 import com.example.actnow.BadgeType
 import com.example.actnow.SingleBadgeDto
@@ -32,11 +33,10 @@ import java.time.temporal.ChronoUnit
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProfileScreen() {
-    val settings: Settings = Settings()
+fun ProfileScreen(navController: NavController) {
     LazyColumn {
         item {
-            ProfileCard()
+            ProfileCard(navController)
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
