@@ -41,7 +41,7 @@ val missionData = MissionDto(
             nombreParticipants = 12,
             listOf("🎁 10 XP", "📜 Certificat de participation", "☕ Boisson chaude offerte"),
             imageName = "marchenoel",
-            participantsImages = listOf("avatar1", "avatar2", "avatar3")
+            participantsImages = mutableListOf("avatar1", "avatar2", "avatar3")
         ),
         SingleMissionDto(
             id = "2",
@@ -56,7 +56,7 @@ val missionData = MissionDto(
             nombreParticipants = 20,
             recompenses = listOf("🌱 15 XP", "🥇 Badge Éco-Citoyen", "🚰 Bouteille réutilisable offerte"),
             imageName = "plantationprintemps",
-            participantsImages = listOf("avatar1", "avatar2", "avatar3")
+            participantsImages = mutableListOf("avatar1", "avatar2", "avatar3")
         ),
         SingleMissionDto(
             id = "3",
@@ -70,7 +70,7 @@ val missionData = MissionDto(
             nombreParticipants = 8,
             recompenses = listOf("🧤 12 XP", "📜 Certificat d'engagement", "🎁 Goodie bag"),
             imageName = "retraite",
-            participantsImages = listOf("avatar1", "avatar2", "avatar3")
+            participantsImages = mutableListOf("avatar1", "avatar2", "avatar3")
         ),
         SingleMissionDto(
             id = "4",
@@ -84,7 +84,7 @@ val missionData = MissionDto(
             nombreParticipants = 25,
             recompenses = listOf("🧤 12 XP", "📜 Certificat d'engagement", "🎁 Goodie bag"),
             imageName = "nettoyage",
-            participantsImages = listOf("avatar1", "avatar2", "avatar3")
+            participantsImages = mutableListOf("avatar1", "avatar2", "avatar3")
         ),
         SingleMissionDto(
             id = "5",
@@ -98,7 +98,7 @@ val missionData = MissionDto(
             nombreParticipants = 10,
             recompenses = listOf("📚 15 XP", "🧸 Badge Bienveillance", "🍪 Goûter offert"),
             imageName = "peinture",
-            participantsImages = listOf("avatar1", "avatar2", "avatar3")
+            participantsImages = mutableListOf("avatar1", "avatar2", "avatar3")
         ),
         SingleMissionDto(
             id = "6",
@@ -113,7 +113,7 @@ val missionData = MissionDto(
             nombreParticipants = 15,
             recompenses = listOf("🌳 25 XP", "🌎 Badge Nature", "🎖️ Certificat Éco-Acteur"),
             imageName = "repas",
-            participantsImages = listOf("avatar1", "avatar2", "avatar3")
+            participantsImages = mutableListOf("avatar1", "avatar2", "avatar3")
         ),
         SingleMissionDto(
             id = "7",
@@ -127,7 +127,7 @@ val missionData = MissionDto(
             nombreParticipants = 20,
             recompenses = listOf("✏️ 10 XP", "⭐ Badge Éducation", "📜 Attestation de tutorat"),
             imageName = "signes",
-            participantsImages = listOf("avatar1", "avatar2", "avatar3")
+            participantsImages = mutableListOf("avatar1", "avatar2", "avatar3")
         ),
         SingleMissionDto(
             id = "8",
@@ -141,7 +141,7 @@ val missionData = MissionDto(
             nombreParticipants = 12,
             recompenses = listOf("🥾 30 XP", "🎽 T-shirt de l’événement", "🏅 Badge Marche Solidaire"),
             imageName = "adoption",
-            participantsImages = listOf("avatar1", "avatar2", "avatar3")
+            participantsImages = mutableListOf("avatar1", "avatar2", "avatar3")
         )
     )
 )

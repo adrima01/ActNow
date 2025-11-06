@@ -7,29 +7,29 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import com.russhwolf.settings.Settings
+import com.example.actnow.viewmodels.MissionViewModel
 
 @Composable
-fun ParticiperButton(
+fun ParticipateButton(
     missionId: String,
     modifier: Modifier = Modifier,
-    onParticipationChange: (Boolean) -> Unit
+    onParticipationChange: (Boolean) -> Unit,
+    viewModel: MissionViewModel
 ) {
-    val settings = Settings()
-    var participe by remember { mutableStateOf(settings.getBooleanOrNull(missionId.toString()) ?: false) }
 
     Button(
         onClick = {
-            participe = !participe
-            settings.putBoolean(missionId.toString(), participe)
-            onParticipationChange(participe) // 🔄 callback vers MissionScreen
+            viewModel.isParticipating = !viewModel.isParticipating
+            viewModel.settings.putBoolean(missionId, viewModel.isParticipating)
+            onParticipationChange(viewModel.isParticipating)
+            viewModel.addOrRemoveUserPicture(viewModel.isParticipating)
         },
         modifier = modifier.fillMaxWidth(),
         colors = ButtonDefaults.buttonColors(
-            containerColor = if (participe) Color.Red else Color(0xFF4CAF50),
+            containerColor = if (viewModel.isParticipating) Color.Red else Color(0xFF4CAF50),
             contentColor = Color.White
         )
     ) {
-        Text(if (participe) "Annuler" else "Participer")
+        Text(if (viewModel.isParticipating) "Annuler" else "Participer")
     }
 }

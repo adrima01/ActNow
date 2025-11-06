@@ -14,34 +14,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.example.actnow.missionData
-import com.example.actnow.SingleMissionDto
 import com.example.actnow.components.MissionCard
 import com.example.actnow.components.MissionSearchBar
-import com.russhwolf.settings.Settings
-import java.util.Calendar
+import com.example.actnow.viewmodels.MissionViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MissionScreen(navController : NavHostController) {
-    val settings = Settings()
-    var dateTimeSortAscending by remember { mutableStateOf(true) }
-    var searchValue by remember { mutableStateOf(TextFieldValue("")) }
-
-    val filteredMissions = missionData.missions.filter { mission ->
-        mission.titre.lowercase().contains(searchValue.text.lowercase())
-    }
-    val filteredMissionsSorted = filteredMissions.sortedWith(compareBy { mission ->
-        val calendar = Calendar.getInstance().apply {
-            time = mission.date
-            set(Calendar.HOUR_OF_DAY, mission.heure.hours)
-            set(Calendar.MINUTE, mission.heure.minutes)
-        }
-        calendar.time
-    })
-
-    val missionsToShow = if (dateTimeSortAscending) filteredMissionsSorted
-    else filteredMissionsSorted.reversed()
+fun MissionScreen(navController : NavHostController, viewModel: MissionViewModel) {
 
     Column(
         modifier = Modifier
@@ -60,8 +39,8 @@ fun MissionScreen(navController : NavHostController) {
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             MissionSearchBar(
-                value = searchValue,
-                onValueChange = { searchValue = it },
+                value = TextFieldValue(viewModel.searchQuery),
+                onValueChange = { viewModel.onSearchQueryChange(it.text) },
                 modifier = Modifier.weight(1f)
             )
 
@@ -69,11 +48,11 @@ fun MissionScreen(navController : NavHostController) {
                 verticalAlignment =
                     Alignment.CenterVertically,
                 modifier = Modifier
-                    .clickable { dateTimeSortAscending = !dateTimeSortAscending }
+                    .clickable { viewModel.toggleSortOrder() }
                     .padding(2.dp)
             ) {
                 Icon(
-                    imageVector = if (dateTimeSortAscending) Icons.Default.ArrowUpward else Icons.Default.ArrowDownward,
+                    imageVector = if (viewModel.dateTimeSortAscending) Icons.Default.ArrowUpward else Icons.Default.ArrowDownward,
                     contentDescription = "Trier par date"
                 )
                 Spacer(modifier = Modifier.width(2.dp))
@@ -85,14 +64,12 @@ fun MissionScreen(navController : NavHostController) {
 
         }
 
-
-
         LazyColumn(
             verticalArrangement = Arrangement.spacedBy(10.dp),
             modifier = Modifier.fillMaxSize()
         ) {
-            items(missionsToShow) { mission ->
-                val participe = settings.getBooleanOrNull(mission.id.toString()) ?: false
+            items(viewModel.getFilteredAndSortedMissions()) { mission ->
+                val participe = viewModel.isParticipating(mission.id)
                 MissionCard(
                     mission = mission,
                     onClick = { navController.navigate("details/${mission.id}") },

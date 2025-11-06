@@ -6,7 +6,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -20,24 +19,31 @@ import com.example.actnow.components.formatAsDdMmYyyy
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.layout.Box
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavHostController
-import com.example.actnow.components.ParticiperButton
+import com.example.actnow.components.ParticipateButton
+import com.example.actnow.viewmodels.MissionViewModel
+
 
 
 
 @Composable
-fun DetailsScreen(mission: SingleMissionDto, navController: NavHostController) {
+fun DetailsScreen(mission: SingleMissionDto, navController: NavHostController, viewModel: MissionViewModel) {
+    if (viewModel.currentMission == null) {
+        val mission = viewModel.missions.first { it.id == mission.id }
+        viewModel.loadCurrentMission(mission)
+    }
+
+    val mission = viewModel.currentMission ?: return
     val context = LocalContext.current
     val imageResId = context.resources.getIdentifier(
         mission.imageName,
         "drawable",
         context.packageName
     )
-    val participantsDrawableIds = mission.participantsImages.map { imageName ->
-        context.resources.getIdentifier(imageName, "drawable", context.packageName)
-    }
+
 
     Box(modifier = Modifier.fillMaxSize()) {
 
@@ -53,7 +59,7 @@ fun DetailsScreen(mission: SingleMissionDto, navController: NavHostController) {
             IconButton(
                 onClick = { navController.popBackStack() }
             ) {
-                Icon(Icons.Default.ArrowBack, contentDescription = "Retour")
+                Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Retour")
             }
 
             Spacer(modifier = Modifier.height(20.dp))
@@ -113,10 +119,11 @@ fun DetailsScreen(mission: SingleMissionDto, navController: NavHostController) {
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.fillMaxWidth()
             ) {
-                participantsDrawableIds.forEachIndexed { index, resId ->
+                viewModel.participants.forEach { image ->
+                    val id = context.resources.getIdentifier(image, "drawable", context.packageName)
                     AsyncImage(
-                        model = resId,
-                        contentDescription = "Participant ${index + 1}",
+                        model = id,
+                        contentDescription = "Participant",
                         modifier = Modifier
                             .size(36.dp)
                             .clip(RoundedCornerShape(18.dp))
@@ -124,7 +131,7 @@ fun DetailsScreen(mission: SingleMissionDto, navController: NavHostController) {
                     )
                 }
                 Spacer(modifier = Modifier.width(8.dp))
-                Text("${mission.participantsImages.size} /${mission.nombreParticipants} Participant(s)")
+                Text("${viewModel.participants.count()}/${viewModel.currentMission?.nombreParticipants} Participant(s)")
             }
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -149,12 +156,13 @@ fun DetailsScreen(mission: SingleMissionDto, navController: NavHostController) {
                 .align(Alignment.BottomCenter)
                 .padding(16.dp)
         ) {
-            ParticiperButton(
+            ParticipateButton(
                 missionId = mission.id,
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(48.dp),
-                onParticipationChange = { /* rafraîchir si nécessaire */ }
+                onParticipationChange = { /* rafraîchir si nécessaire */ },
+                viewModel
             )
         }
     }

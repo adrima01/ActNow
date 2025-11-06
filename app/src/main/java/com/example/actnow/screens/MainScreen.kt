@@ -19,6 +19,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.actnow.missionData
+import com.example.actnow.viewmodels.MissionViewModel
 import com.example.actnow.viewmodels.ProfileViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -62,13 +63,15 @@ fun MainScreen(navController: NavHostController) {
             }
         }
     ) { contentPadding ->
+        val missionViewModel: MissionViewModel = viewModel()
+        val profileViewModel: ProfileViewModel = viewModel()
         NavHost(
             navController = navController,
             startDestination = "missions",
             modifier = Modifier.padding(contentPadding)
         ) {
             composable("missions") {
-                MissionScreen(navController)
+                MissionScreen(navController, missionViewModel)
             }
 
             composable("map") {
@@ -76,24 +79,23 @@ fun MainScreen(navController: NavHostController) {
             }
 
             composable("profile") {
-                val profileViewModel: ProfileViewModel = viewModel()
                 ProfileScreen(navController, profileViewModel)
             }
 
             composable("next_Missions") {
-                NextMissionsScreen(navController)
+                NextMissionsScreen(navController, missionViewModel)
             }
 
             composable("last_Missions") {
-                val profileViewModel: ProfileViewModel = viewModel()
                 LastMissionsScreen(navController, profileViewModel)
             }
 
             composable("details/{missionId}") { backStackEntry ->
                 val missionId = backStackEntry.arguments?.getString("missionId")
                 val mission = missionData.missions.find { it.id == missionId }
+                val missionViewModel: MissionViewModel = viewModel()
                 if (mission != null) {
-                    DetailsScreen(mission = mission, navController = navController)
+                    DetailsScreen(mission = mission, navController = navController, missionViewModel)
                 }
             }
 

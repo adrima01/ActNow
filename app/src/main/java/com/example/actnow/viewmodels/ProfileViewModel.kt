@@ -1,10 +1,14 @@
 package com.example.actnow.viewmodels
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import com.example.actnow.BadgeData
 import com.example.actnow.BadgeType
 import com.example.actnow.Niveau
 import com.example.actnow.SingleBadgeDto
+import com.example.actnow.SingleMissionDto
 import com.example.actnow.missionData
 import com.example.actnow.utilisateur
 import com.russhwolf.settings.Settings
@@ -41,11 +45,14 @@ class ProfileViewModel : ViewModel() {
 
     val settings = Settings()
 
-    val participatedMissions = missionData.missions.filter { mission ->
-        settings.getBooleanOrNull(mission.id.toString()) == true
-    }
+    var nextMissions by mutableStateOf<List<SingleMissionDto>>(emptyList())
 
-    val count = participatedMissions.size
+    fun updateParticipationList(){
+        val participate = missionData.missions.filter { mission ->
+            settings.getBooleanOrNull(mission.id) == true
+        }
+        nextMissions = participate
+    }
 
     init {
         val monthsBetween = ChronoUnit.MONTHS.between(utilisateur.date, LocalDate.now())

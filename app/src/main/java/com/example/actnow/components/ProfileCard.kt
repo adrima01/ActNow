@@ -128,7 +128,7 @@ fun ProfileCard(navController: NavController, viewModel: ProfileViewModel) {
                     )
                     StatCard(
                         title = "Missions à venir",
-                        value = viewModel.count,
+                        value = viewModel.nextMissions.count(),
                         modifier = Modifier.weight(1f),
                         icon = Icons.Filled.DateRange,
                         iconDescription = "Date Icon",

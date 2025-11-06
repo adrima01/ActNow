@@ -8,7 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -20,17 +20,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.actnow.components.MissionCard
-import com.example.actnow.missionData
-import com.russhwolf.settings.Settings
+import com.example.actnow.viewmodels.MissionViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NextMissionsScreen(navController: NavController) {
+fun NextMissionsScreen(navController: NavController, missionViewModel: MissionViewModel) {
 
-    val settings = Settings()
-
-    val participatedMissions = missionData.missions.filter { mission ->
-        settings.getBooleanOrNull(mission.id.toString()) == true
+    val participatedMissions = missionViewModel.missions.filter { mission ->
+        missionViewModel.settings.getBooleanOrNull(mission.id) == true
     }
 
     Column(
@@ -40,7 +37,7 @@ fun NextMissionsScreen(navController: NavController) {
         verticalArrangement = Arrangement.spacedBy(20.dp)
     ) {
         IconButton(onClick = { navController.popBackStack() }) {
-            Icon(Icons.Default.ArrowBack, contentDescription = "Retour")
+            Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Retour")
         }
 
         Text(
@@ -56,7 +53,7 @@ fun NextMissionsScreen(navController: NavController) {
             items(participatedMissions) { mission ->
                 MissionCard(
                     mission = mission,
-                    onClick = { },
+                    onClick = {  navController.navigate("details/${mission.id}") },
                     isParticipating = true
                 )
             }
