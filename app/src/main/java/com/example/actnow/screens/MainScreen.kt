@@ -1,5 +1,7 @@
 package com.example.actnow.screens
 
+import androidx.compose.foundation.Image
+import com.example.actnow.R
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -10,6 +12,9 @@ import androidx.compose.material.icons.filled.CalendarToday
 import androidx.compose.material.icons.filled.Map
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -25,7 +30,16 @@ fun MainScreen(navController: NavHostController) {
 
     Scaffold(
         topBar = {
-            TopAppBar(title = { Text("ActNow") })
+            TopAppBar(
+                title = { Text("") },
+                navigationIcon = {
+                    Image(
+                        painter = painterResource(id = R.drawable.logo),
+                        contentDescription = "Logo",
+                        modifier = Modifier.size(40.dp),
+                    )
+                }
+            )
         },
         bottomBar = {
             NavigationBar {
@@ -62,7 +76,8 @@ fun MainScreen(navController: NavHostController) {
             }
 
             composable("profile") {
-                ProfileScreen(navController, ProfileViewModel())
+                val profileViewModel: ProfileViewModel = viewModel()
+                ProfileScreen(navController, profileViewModel)
             }
 
             composable("next_Missions") {

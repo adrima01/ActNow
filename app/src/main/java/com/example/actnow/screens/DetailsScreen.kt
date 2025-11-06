@@ -22,7 +22,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.layout.Box
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.example.actnow.components.ParticiperButton
 
@@ -42,11 +41,6 @@ fun DetailsScreen(mission: SingleMissionDto, navController: NavHostController) {
 
     Box(modifier = Modifier.fillMaxSize()) {
 
-        IconButton(
-            onClick = { navController.popBackStack() }
-        ) {
-            Icon(Icons.Default.ArrowBack, contentDescription = "Retour")
-        }
 
         Spacer(modifier = Modifier.height(20.dp))
 
@@ -56,6 +50,12 @@ fun DetailsScreen(mission: SingleMissionDto, navController: NavHostController) {
                 .padding(20.dp)
                 .verticalScroll(rememberScrollState())
         ) {
+            IconButton(
+                onClick = { navController.popBackStack() }
+            ) {
+                Icon(Icons.Default.ArrowBack, contentDescription = "Retour")
+            }
+
             Spacer(modifier = Modifier.height(20.dp))
 
             // Nom de l'association
