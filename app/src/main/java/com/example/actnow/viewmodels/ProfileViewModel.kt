@@ -1,5 +1,6 @@
 package com.example.actnow.viewmodels
 
+import androidx.lifecycle.ViewModel
 import com.example.actnow.BadgeData
 import com.example.actnow.BadgeType
 import com.example.actnow.SingleBadgeDto
@@ -7,7 +8,7 @@ import com.example.actnow.utilisateur
 import java.time.LocalDate
 import java.time.temporal.ChronoUnit
 
-class ProfileViewModel {
+class ProfileViewModel : ViewModel() {
 
     val achievedBadges: List<SingleBadgeDto>
     val lockedBadges: List<SingleBadgeDto>
