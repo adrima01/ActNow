@@ -40,7 +40,7 @@ data class Utilisateur (
 
 val utilisateur = Utilisateur(
     id = 1,
-    nom = "Müller",
+    nom = "Claude",
     prenom = "Thomas",
     heures = 10,
     date = LocalDate.of(2025, 11, 4),

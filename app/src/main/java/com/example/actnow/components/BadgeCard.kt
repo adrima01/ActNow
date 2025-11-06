@@ -48,7 +48,7 @@ fun BadgeCard(modifier: Modifier, locked : Boolean, badge : SingleBadgeDto) {
             modifier = Modifier
                 .fillMaxWidth()
                 .fillMaxHeight()
-                .padding(12.dp),
+                .padding(10.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Image(
@@ -63,7 +63,7 @@ fun BadgeCard(modifier: Modifier, locked : Boolean, badge : SingleBadgeDto) {
 
             Column(
                 modifier = Modifier
-                    .padding(14.dp),
+                    .padding(12.dp),
                 horizontalAlignment = Alignment.Start,
                 verticalArrangement = Arrangement.Center
             ) {

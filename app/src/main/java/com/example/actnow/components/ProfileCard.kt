@@ -61,7 +61,7 @@ fun ProfileCard(navController: NavController, viewModel: ProfileViewModel) {
                 Spacer(modifier = Modifier.width(12.dp))
 
                 Column (
-                    verticalArrangement = Arrangement.spacedBy(16.dp)
+                    verticalArrangement = Arrangement.spacedBy(20.dp)
                 ) {
                     Text(
                         text = viewModel.fullName,
@@ -70,7 +70,7 @@ fun ProfileCard(navController: NavController, viewModel: ProfileViewModel) {
                     )
                     Text(
                         text = "Membre depuis ${viewModel.formattedDate}",
-                        fontSize = 14.sp,
+                        fontSize = 12.sp,
                     )
                     Row (
                         horizontalArrangement = Arrangement.spacedBy(8.dp)
@@ -86,7 +86,7 @@ fun ProfileCard(navController: NavController, viewModel: ProfileViewModel) {
                                     .padding(8.dp),
                                 text = viewModel.niveauActuel.titre,
                                 color = Color.White,
-                                fontSize = 14.sp
+                                fontSize = 12.sp
                             )
                         }
                         Card (
@@ -100,7 +100,7 @@ fun ProfileCard(navController: NavController, viewModel: ProfileViewModel) {
                                     .padding(8.dp),
                                 text = "${viewModel.totalHeures}h de bénévolat",
                                 color = Color.White,
-                                fontSize = 14.sp
+                                fontSize = 12.sp
                             )
                         }
                     }
