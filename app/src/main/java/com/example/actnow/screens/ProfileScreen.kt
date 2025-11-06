@@ -21,19 +21,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.actnow.BadgeData
-import com.example.actnow.BadgeType
-import com.example.actnow.SingleBadgeDto
 import com.example.actnow.components.BadgeCard
 import com.example.actnow.components.ProfileCard
-import com.example.actnow.utilisateur
-import com.russhwolf.settings.Settings
-import java.time.LocalDate
-import java.time.temporal.ChronoUnit
+import com.example.actnow.viewmodels.ProfileViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ProfileScreen(navController: NavController) {
+fun ProfileScreen(navController: NavController, viewModel: ProfileViewModel) {
     LazyColumn {
         item {
             ProfileCard(navController)
@@ -55,29 +49,7 @@ fun ProfileScreen(navController: NavController) {
                 )
             }
         }
-        val monthsBetween = ChronoUnit.MONTHS.between(utilisateur.date, LocalDate.now())
-        val achievedBadgesList = mutableListOf<SingleBadgeDto>()
-        val lockedBadgesList = mutableListOf<SingleBadgeDto>()
-        BadgeData.badges.forEach {
-            when (it.type){
-                BadgeType.HOUR -> if (utilisateur.heures >= it.targetAmount) {
-                    achievedBadgesList.add(it)
-                } else{
-                    lockedBadgesList.add(it)
-                }
-                BadgeType.MISSION -> if (utilisateur.missionsCompletees >= it.targetAmount) {
-                    achievedBadgesList.add(it)
-                } else{
-                    lockedBadgesList.add(it)
-                }
-                BadgeType.TIME -> if (monthsBetween >= it.targetAmount) {
-                    achievedBadgesList.add(it)
-                } else{
-                    lockedBadgesList.add(it)
-                }
-            }
-        }
-        items(achievedBadgesList.chunked(2)) { rowItems ->
+        items(viewModel.achievedBadges.chunked(2)) { rowItems ->
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
@@ -117,7 +89,7 @@ fun ProfileScreen(navController: NavController) {
                 )
             }
         }
-        items(lockedBadgesList.chunked(2)) { rowItems ->
+        items(viewModel.lockedBadges.chunked(2)) { rowItems ->
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
@@ -139,4 +111,3 @@ fun ProfileScreen(navController: NavController) {
     }
 
 }
-

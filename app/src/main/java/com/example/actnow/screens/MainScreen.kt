@@ -14,6 +14,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.actnow.missionData
+import com.example.actnow.viewmodels.ProfileViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -61,7 +62,7 @@ fun MainScreen(navController: NavHostController) {
             }
 
             composable("profile") {
-                ProfileScreen(navController)
+                ProfileScreen(navController, ProfileViewModel())
             }
 
             composable("next_Missions") {
