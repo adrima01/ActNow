@@ -34,9 +34,9 @@ class ProfileViewModel : ViewModel() {
     )
 
     val fullName: String = "${utilisateur.prenom} ${utilisateur.nom}"
+
+    val missionsCompletees = utilisateur.missionsCompletees
     val totalHeures: Int = utilisateur.heures
-    val missionsCompletees: Int = utilisateur.missionsCompletees
-    val missionsAVenir: Int = utilisateur.missionsAVenir
     val imageResId: Int = utilisateur.image
 
     val settings = Settings()
@@ -56,7 +56,7 @@ class ProfileViewModel : ViewModel() {
         BadgeData.badges.forEach { badge ->
             val achievedCondition = when (badge.type) {
                 BadgeType.HOUR -> utilisateur.heures >= badge.targetAmount
-                BadgeType.MISSION -> utilisateur.missionsCompletees >= badge.targetAmount
+                BadgeType.MISSION -> utilisateur.missionsCompletees.count() >= badge.targetAmount
                 BadgeType.TIME -> monthsBetween >= badge.targetAmount
             }
             if (achievedCondition) achieved.add(badge) else locked.add(badge)

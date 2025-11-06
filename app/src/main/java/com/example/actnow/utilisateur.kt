@@ -1,5 +1,7 @@
 package com.example.actnow
 
+import java.sql.Date
+import java.sql.Time
 import java.time.LocalDate
 
 enum class Niveau(val titre: String, val heuresRequises: Int) {
@@ -31,22 +33,52 @@ data class Utilisateur (
     val prenom: String,
     val heures: Int,
     val date: LocalDate,
-    val missionsCompletees: Int,
-    val missionsAVenir: Int,
-    val statut: Int,
     val points: Int,
-    val image: Int
+    val image: Int,
+    val missionsCompletees: List<SingleMissionDto>
 )
 
 val utilisateur = Utilisateur(
-    1,
-    "Müller",
-    "Thomas",
-    100,
-    LocalDate.of(2025, 10, 4),
-    5,
-    2,
-    3,
-    125,
-    R.drawable.profile_monsieur
+    id = 1,
+    nom = "Müller",
+    prenom = "Thomas",
+    heures = 100,
+    date = LocalDate.of(2025, 10, 4),
+    points = 125,
+    image = R.drawable.profile_monsieur,
+    missionsCompletees = listOf(SingleMissionDto(
+        id = "1",
+        titre = "Marché de Noël",
+        association = associationData.associations[0],
+        date = Date.valueOf("2024-12-05"),
+        heure = Time.valueOf("14:30:00"),
+        lieu = "Metz",
+        description = "En ce temps d’hiver, notre association a le plaisir de vous inviter à son marché de Noël solidaire. " +
+                "Dans une ambiance chaleureuse et festive, vous découvrirez des stands tenus par des bénévoles et des habitants engagés : artisanat local, décorations faites main, gourmandises de saison et idées cadeaux responsables." +
+                "Nous recherchons des personnes prêtes à donner un peu de leur temps :\n" +
+                "tenir un stand,\n" +
+                "aider à l’installation et à la décoration,\n" +
+                "participer à l’accueil du public,\n" +
+                "ou encore prêter main-forte pour les animations.\n" +
+                "Chaque geste compte, et ensemble, nous pouvons créer un événement chaleureux, festif et engagé.",
+        nombreParticipants = 12,
+        listOf("🎁 10 XP", "📜 Certificat de participation", "☕ Boisson chaude offerte"),
+        imageName = "marchenoel",
+        participantsImages = listOf("avatar1", "avatar2", "avatar3")
+    ),
+    SingleMissionDto(
+        id = "2",
+        titre = "Plantation de Printemps",
+        association = associationData.associations[1],
+        date = Date.valueOf("2024-03-20"),
+        heure = Time.valueOf("09:00:00"),
+        lieu = "Metz",
+        description = "Rejoignez Les Mains Vertes pour une journée de plantation citoyenne au parc Blandan ! 🌱 " +
+                "Au programme : préparation du sol, plantation d’arbres et de fleurs locales, et sensibilisation à la biodiversité. " +
+                "Aucun prérequis nécessaire, juste votre bonne humeur et vos gants de jardinage !",
+        nombreParticipants = 20,
+        recompenses = listOf("🌱 15 XP", "🥇 Badge Éco-Citoyen", "🚰 Bouteille réutilisable offerte"),
+        imageName = "plantationprintemps",
+        participantsImages = listOf("avatar1", "avatar2", "avatar3")
+    ))
 )

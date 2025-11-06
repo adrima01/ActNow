@@ -117,7 +117,7 @@ fun ProfileCard(navController: NavController, viewModel: ProfileViewModel) {
                 ) {
                     StatCard(
                         title = "Mission(s) complétée(s)",
-                        value = viewModel.missionsCompletees,
+                        value = viewModel.missionsCompletees.count(),
                         modifier = Modifier.weight(1f),
                         icon = Icons.Filled.Done,
                         iconDescription = "Done Icon",

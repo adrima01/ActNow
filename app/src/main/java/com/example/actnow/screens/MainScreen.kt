@@ -85,8 +85,10 @@ fun MainScreen(navController: NavHostController) {
             }
 
             composable("last_Missions") {
-                LastMissionsScreen(navController)
+                val profileViewModel: ProfileViewModel = viewModel()
+                LastMissionsScreen(navController, profileViewModel)
             }
+
             composable("details/{missionId}") { backStackEntry ->
                 val missionId = backStackEntry.arguments?.getString("missionId")
                 val mission = missionData.missions.find { it.id == missionId }
