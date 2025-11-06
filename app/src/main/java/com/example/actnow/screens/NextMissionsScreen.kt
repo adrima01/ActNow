@@ -33,7 +33,7 @@ fun NextMissionsScreen(navController: NavController, missionViewModel: MissionVi
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(16.dp),
+            .padding(20.dp),
         verticalArrangement = Arrangement.spacedBy(20.dp)
     ) {
         IconButton(onClick = { navController.popBackStack() }) {

@@ -1,5 +1,6 @@
 package com.example.actnow.components
 
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -10,6 +11,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
@@ -29,10 +32,11 @@ import androidx.compose.ui.unit.sp
 fun StatCard(title: String, value: Int, modifier: Modifier = Modifier, icon: ImageVector, iconDescription: String, color: Color, onClick: () -> Unit) {
     Card(
         modifier = modifier
-            .height(100.dp),
+            .height(100.dp)
+            .border(4.dp, color, shape = RoundedCornerShape(16.dp)),
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(
-            containerColor = color.copy(alpha = 0.2f)
+            containerColor = color
         ),
     ) {
         Column(
@@ -59,6 +63,11 @@ fun StatCard(title: String, value: Int, modifier: Modifier = Modifier, icon: Ima
                     fontWeight = FontWeight.Bold,
                     fontSize = 25.sp,
                     modifier = Modifier.padding(8.dp)
+                )
+                Icon(
+                    imageVector = Icons.AutoMirrored.Filled.ArrowForward,
+                    contentDescription = iconDescription,
+                    modifier = Modifier.size(34.dp),
                 )
             }
             Text(

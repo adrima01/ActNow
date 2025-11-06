@@ -11,7 +11,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -35,15 +34,13 @@ fun MissionCard(
         context.packageName
     )
 
-    val borderColor = if (isParticipating) Color(0xFF4CAF50) else MaterialTheme.colorScheme.outline
-
     ElevatedCard(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 8.dp, vertical = 4.dp)
             .border(2.dp, if (isParticipating) Color(0xFF4CAF50) else MaterialTheme.colorScheme.outline, RoundedCornerShape(16.dp))
             .clip(RoundedCornerShape(16.dp))
-            .clickable { onClick() },
+            .clickable { onClick() }
+            .height(150.dp),
         colors = CardDefaults.elevatedCardColors(
             containerColor = MaterialTheme.colorScheme.surface
         )
@@ -91,7 +88,7 @@ fun MissionCard(
                 model = imageResId,
                 contentDescription = mission.titre,
                 modifier = Modifier
-                    .size(100.dp)
+                    .size(150.dp)
                     .clip(RoundedCornerShape(12.dp)),
                 contentScale = ContentScale.Crop
             )

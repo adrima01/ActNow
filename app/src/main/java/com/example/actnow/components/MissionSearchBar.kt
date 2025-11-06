@@ -1,6 +1,6 @@
 package com.example.actnow.components
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Search
@@ -11,6 +11,7 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.TextField
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 
 @Composable
 fun MissionSearchBar(
@@ -22,11 +23,16 @@ fun MissionSearchBar(
         value = value,
         onValueChange = onValueChange,
         modifier = modifier,
-        placeholder = { Text("Rechercher une mission") },
+        placeholder = {
+            Text(
+                text = "Rechercher une mission",
+                color = Color.White
+            ) },
         singleLine = true,
+        shape = RoundedCornerShape(20.dp),
         colors = TextFieldDefaults.colors(
             focusedContainerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.8F),
-            unfocusedContainerColor = MaterialTheme.colorScheme.primary,
+            unfocusedContainerColor = Color.Blue.copy(alpha = 0.3f),
             focusedPlaceholderColor = Color.Gray,
             unfocusedPlaceholderColor = Color.Gray,
             focusedTextColor = MaterialTheme.colorScheme.onPrimary,

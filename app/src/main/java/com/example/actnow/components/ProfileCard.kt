@@ -54,7 +54,7 @@ fun ProfileCard(navController: NavController, viewModel: ProfileViewModel) {
                     contentDescription = "profile picture",
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
-                        .size(90.dp)
+                        .size(100.dp)
                         .clip(CircleShape)
                 )
 
@@ -76,9 +76,9 @@ fun ProfileCard(navController: NavController, viewModel: ProfileViewModel) {
                         horizontalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
                         Card (
-                            shape = RoundedCornerShape(16.dp),
+                            shape = RoundedCornerShape(10.dp),
                             colors = CardDefaults.cardColors(
-                                containerColor = Color.Blue.copy(alpha = 0.6f)
+                                containerColor = Color.Blue.copy(alpha = 0.4f)
                             )
                         ) {
                             Text(
@@ -90,9 +90,9 @@ fun ProfileCard(navController: NavController, viewModel: ProfileViewModel) {
                             )
                         }
                         Card (
-                            shape = RoundedCornerShape(16.dp),
+                            shape = RoundedCornerShape(10.dp),
                             colors = CardDefaults.cardColors(
-                                containerColor = Color.Blue.copy(alpha = 0.6f)
+                                containerColor = Color.Blue.copy(alpha = 0.4f)
                             )
                         ){
                             Text(
@@ -105,6 +105,23 @@ fun ProfileCard(navController: NavController, viewModel: ProfileViewModel) {
                         }
                     }
                 }
+            }
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+            ){
+                Text("Progression vers ${viewModel.niveauSuivant?.titre}", fontWeight = FontWeight.SemiBold)
+                Spacer(modifier = Modifier.height(8.dp))
+                LinearProgressIndicator(
+                    progress = { viewModel.pourcentage },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(10.dp),
+                    color = Color.Blue.copy(alpha = 0.4f),
+                    trackColor = Color.LightGray,
+                )
+                Spacer(modifier = Modifier.height(4.dp))
+                Text("${( viewModel.pourcentage * 100).toInt()} %", fontSize = 12.sp)
             }
             Column(
                 modifier = Modifier
@@ -121,7 +138,7 @@ fun ProfileCard(navController: NavController, viewModel: ProfileViewModel) {
                         modifier = Modifier.weight(1f),
                         icon = Icons.Filled.Done,
                         iconDescription = "Done Icon",
-                        color = Color.Green,
+                        color = Color(0xFFA7D4E7),
                         onClick = {
                             navController.navigate("last_missions")
                         }
@@ -132,30 +149,14 @@ fun ProfileCard(navController: NavController, viewModel: ProfileViewModel) {
                         modifier = Modifier.weight(1f),
                         icon = Icons.Filled.DateRange,
                         iconDescription = "Date Icon",
-                        color = Color.Magenta,
+                        color = Color(0xFFD4F4D7),
                         onClick = {
                             navController.navigate("next_missions")
                         }
                     )
                 }
             }
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-            ){
-                Text("Progression vers ${viewModel.niveauSuivant?.titre}", fontWeight = FontWeight.SemiBold)
-                Spacer(modifier = Modifier.height(8.dp))
-                LinearProgressIndicator(
-                    progress = { viewModel.pourcentage },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(10.dp),
-                    color = Color.Blue.copy(alpha = 0.6f),
-                    trackColor = Color.LightGray,
-                )
-                Spacer(modifier = Modifier.height(4.dp))
-                Text("${( viewModel.pourcentage * 100).toInt()} %", fontSize = 12.sp)
-            }
+
         }
     }
 }

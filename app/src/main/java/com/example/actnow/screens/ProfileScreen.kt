@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -37,11 +38,12 @@ fun ProfileScreen(navController: NavController, viewModel: ProfileViewModel) {
     LazyColumn {
         item {
             ProfileCard(navController, viewModel)
+            Spacer(modifier = Modifier.height(20.dp))
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
                 modifier = Modifier
-                    .padding(16.dp)
+                    .padding(top = 4.dp, bottom = 4.dp, start = 16.dp)
             ) {
                 Icon(
                     imageVector = Icons.Filled.Stars,
@@ -57,15 +59,16 @@ fun ProfileScreen(navController: NavController, viewModel: ProfileViewModel) {
         }
         items(viewModel.achievedBadges.chunked(2)) { rowItems ->
             Row(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 16.dp, end = 16.dp),
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
             ) {
                 rowItems.forEach { badge ->
                     BadgeCard(
-                        title = badge.titre,
-                        description = badge.description,
-                        image = badge.image,
-                        modifier = Modifier.weight(1f)
+                        modifier = Modifier.weight(1f),
+                        locked = false,
+                        badge = badge
                     )
                 }
 
@@ -75,12 +78,13 @@ fun ProfileScreen(navController: NavController, viewModel: ProfileViewModel) {
             }
         }
         item {
-
+            Spacer(modifier = Modifier.height(20.dp))
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
                 modifier = Modifier
-                    .padding(16.dp)
+                    .padding(4.dp)
+                    .padding(top = 4.dp, bottom = 4.dp, start = 16.dp)
 
             ) {
                 Icon(
@@ -97,15 +101,17 @@ fun ProfileScreen(navController: NavController, viewModel: ProfileViewModel) {
         }
         items(viewModel.lockedBadges.chunked(2)) { rowItems ->
             Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 16.dp, end = 16.dp),
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+
             ) {
                 rowItems.forEach { badge ->
                     BadgeCard(
-                        title = badge.titre,
-                        description = badge.description,
-                        image = badge.image,
-                        modifier = Modifier.weight(1f)
+                        modifier = Modifier.weight(1f),
+                        locked = true,
+                        badge = badge
                     )
                 }
 

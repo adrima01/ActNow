@@ -48,7 +48,6 @@ fun DetailsScreen(mission: SingleMissionDto, navController: NavHostController, v
     Box(modifier = Modifier.fillMaxSize()) {
 
 
-        Spacer(modifier = Modifier.height(20.dp))
 
         Column(
             modifier = Modifier

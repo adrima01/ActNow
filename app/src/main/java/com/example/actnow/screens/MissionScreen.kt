@@ -36,7 +36,8 @@ fun MissionScreen(navController : NavHostController, viewModel: MissionViewModel
 
         Row(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            verticalAlignment = Alignment.CenterVertically
         ) {
             MissionSearchBar(
                 value = TextFieldValue(viewModel.searchQuery),

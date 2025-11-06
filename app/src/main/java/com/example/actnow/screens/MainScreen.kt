@@ -12,6 +12,7 @@ import androidx.compose.material.icons.filled.CalendarToday
 import androidx.compose.material.icons.filled.Map
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -57,7 +58,13 @@ fun MainScreen(navController: NavHostController) {
                                 contentDescription = destination.contentDescription
                             )
                         },
-                        label = { Text(destination.label) }
+                        label = { Text(destination.label) },
+                        colors = NavigationBarItemDefaults.colors(
+                            selectedIconColor = Color.Blue.copy(alpha = 0.8f),
+                            selectedTextColor = Color.Blue.copy(alpha = 0.8f),
+                            unselectedIconColor = Color.Blue.copy(alpha = 0.5f),
+                            unselectedTextColor = Color.Blue.copy(alpha = 0.5f)
+                        )
                     )
                 }
             }

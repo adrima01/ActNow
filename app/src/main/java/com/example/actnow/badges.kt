@@ -12,6 +12,7 @@ data class SingleBadgeDto(
     val id: Int,
     val titre: String,
     val description: String,
+    val objectif: String,
     val image: Int,
     val achieved: Boolean,
     val type: BadgeType,
@@ -23,7 +24,8 @@ val BadgeData = BadgeDto(
         SingleBadgeDto(
             id = 1,
             titre = "1 mois ensemble",
-            description = "Tu es bénévole depuis un mois.",
+            description = "Bénévole depuis un mois",
+            objectif = "Membre depuis 1 mois",
             image = R.drawable.mois1,
             achieved = true,
             type = BadgeType.TIME,
@@ -33,7 +35,8 @@ val BadgeData = BadgeDto(
         SingleBadgeDto(
             id = 2,
             titre = "Premier pas",
-            description = "Tu as complété ta première mission.",
+            description = "Première mission complétée",
+            objectif = "1 mission à complétér",
             image = R.drawable.pas,
             achieved = true,
             type = BadgeType.MISSION,
@@ -42,7 +45,8 @@ val BadgeData = BadgeDto(
         SingleBadgeDto(
             id = 3,
             titre = "Bénévole active",
-            description = "Tu as passé 10h sur des missions.",
+            description = "10h de bénévolat",
+            objectif = "10h à complétér",
             image = R.drawable.benevole,
             achieved = false,
             type = BadgeType.HOUR,
@@ -51,7 +55,8 @@ val BadgeData = BadgeDto(
         SingleBadgeDto(
             id = 4,
             titre = "Cœur généreux",
-            description = "Tu as complété 10 missions.",
+            description = "10 missions complétées",
+            objectif = "10 missions à complétér",
             image = R.drawable.coeur,
             achieved = false,
             type = BadgeType.MISSION,
@@ -60,7 +65,8 @@ val BadgeData = BadgeDto(
         SingleBadgeDto(
             id = 5,
             titre = "Marathonien",
-            description = "Tu as passé 100h sur des missions.",
+            description = "100h de bénévolat",
+            objectif = "100h à complétér",
             image = R.drawable.marathonien,
             achieved = false,
             type = BadgeType.HOUR,

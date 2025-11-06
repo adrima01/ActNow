@@ -40,7 +40,7 @@ val missionData = MissionDto(
                     "ou encore prêter main-forte pour les animations.\n" +
                     "Chaque geste compte, et ensemble, nous pouvons créer un événement chaleureux, festif et engagé.",
             nombreParticipants = 12,
-            recompenses = listOf("🎁 10 XP", "📜 Certificat de participation", "☕ Boisson chaude offerte"),
+            recompenses = listOf("📜 Certificat de participation", "☕ Boisson chaude offerte"),
             imageName = "marchenoel",
             adresse = Adresse(rue = "Rue Madame de Staël",
                 numero = "22",
@@ -60,7 +60,7 @@ val missionData = MissionDto(
                     "Au programme : préparation du sol, plantation d’arbres et de fleurs locales, et sensibilisation à la biodiversité. " +
                     "Aucun prérequis nécessaire, juste votre bonne humeur et vos gants de jardinage !",
             nombreParticipants = 20,
-            recompenses = listOf("🌱 15 XP", "🥇 Badge Éco-Citoyen", "🚰 Bouteille réutilisable offerte"),
+            recompenses = listOf("🥇 Badge Éco-Citoyen", "🚰 Bouteille réutilisable offerte"),
             imageName = "plantationprintemps",
             adresse = Adresse(
                 rue = "Rue Saint-Livier",
@@ -81,7 +81,7 @@ val missionData = MissionDto(
             description = "L’association Sourires Solidaires organise un après-midi de partage avec les résidents de la maison de retraite Les Amandiers. 💕 " +
                     "Lecture, musique, discussions, jeux de société : toutes les bonnes volontés sont bienvenues pour apporter un moment de joie et de compagnie.",
             nombreParticipants = 8,
-            recompenses = listOf("🧤 12 XP", "📜 Certificat d'engagement", "🎁 Goodie bag"),
+            recompenses = listOf("📜 Certificat d'engagement", "🎁 Goodie bag"),
             imageName = "retraite",
             adresse = Adresse(
                 rue = "Rue Paul Michaux",
@@ -102,7 +102,7 @@ val missionData = MissionDto(
             description = "Les Gardiens de l’Océan vous invitent à participer à une grande opération de nettoyage de plage à l’occasion de la Journée Mondiale des Océans 🌊. " +
                     "Sacs, gants et bonne humeur fournis ! Ensemble, protégeons nos littoraux et sensibilisons à la réduction des déchets.",
             nombreParticipants = 25,
-            recompenses = listOf("🧤 12 XP", "📜 Certificat d'engagement", "🎁 Goodie bag"),
+            recompenses = listOf("📜 Certificat d'engagement", "🎁 Goodie bag"),
             imageName = "nettoyage",
             adresse = Adresse(
                 rue = "Rue aux Ossons",
@@ -123,7 +123,7 @@ val missionData = MissionDto(
             description = "Les Petits Artistes recherchent des bénévoles pour encadrer un atelier de peinture avec des enfants de 6 à 10 ans 🎨. " +
                     "Aidez-les à exprimer leur créativité à travers les couleurs et participez à la mise en place de leur exposition de fin d’année.",
             nombreParticipants = 10,
-            recompenses = listOf("📚 15 XP", "🧸 Badge Bienveillance", "🍪 Goûter offert"),
+            recompenses = listOf("🧸 Badge Bienveillance", "🍪 Goûter offert"),
             imageName = "peinture",
             adresse = Adresse(
                 rue = "En Nexirue",
@@ -145,7 +145,7 @@ val missionData = MissionDto(
                     "Les bénévoles aideront à la préparation, la distribution et l’accueil des bénéficiaires. " +
                     "Un moment fort de partage et d’humanité avant les fêtes !",
             nombreParticipants = 15,
-            recompenses = listOf("🌳 25 XP", "🌎 Badge Nature", "🎖️ Certificat Éco-Acteur"),
+            recompenses = listOf("🌎 Badge Nature", "🎖️ Certificat Éco-Acteur"),
             imageName = "repas",
             adresse = Adresse(
                 rue = "Rue Saint-Etienne",
@@ -166,7 +166,7 @@ val missionData = MissionDto(
             description = "Participez à un atelier d’initiation à la langue des signes avec Aide & Sourds France 🤟. " +
                     "Apprenez les bases de la communication gestuelle et découvrez comment mieux interagir avec les personnes sourdes au quotidien.",
             nombreParticipants = 20,
-            recompenses = listOf("✏️ 10 XP", "⭐ Badge Éducation", "📜 Attestation de tutorat"),
+            recompenses = listOf("⭐ Badge Éducation", "📜 Attestation de tutorat"),
             imageName = "signes",
             adresse = Adresse(
                 rue = "Rue des Jardins",
@@ -187,7 +187,7 @@ val missionData = MissionDto(
             description = "Le Refuge Animalier du Soleil organise une grande journée d’adoption ! 🐾 " +
                     "Les bénévoles aideront à accueillir le public, présenter les animaux et sensibiliser sur la cause animale.",
             nombreParticipants = 12,
-            recompenses = listOf("🥾 30 XP", "🎽 T-shirt de l’événement", "🏅 Badge Marche Solidaire"),
+            recompenses = listOf("🎽 T-shirt de l’événement", "🏅 Badge Marche Solidaire"),
             imageName = "adoption",
             adresse = Adresse(
                 rue = "Rue de la Charmille",
