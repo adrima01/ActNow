@@ -65,17 +65,22 @@ fun DetailsScreen(mission: SingleMissionDto, navController: NavHostController, v
 
             // Nom de l'association
             Text(
-                text = mission.association.nom,
-                style = MaterialTheme.typography.headlineMedium,
+                text = mission.titre,
+                style = MaterialTheme.typography.headlineLarge,
                 color = Color(0xFF1F2937)
             )
             Text(
-                text = mission.lieu,
+                text = "Association: " + mission.association.nom,
                 style = MaterialTheme.typography.titleMedium,
                 color = Color(0xFF1F2937)
             )
             Text(
-                text = mission.date.formatAsDdMmYyyy(),
+                text = "Lieu: " + mission.lieu,
+                style = MaterialTheme.typography.titleMedium,
+                color = Color(0xFF1F2937)
+            )
+            Text(
+                text = "Date: " + mission.date.formatAsDdMmYyyy(),
                 style = MaterialTheme.typography.titleMedium,
                 color = Color(0xFF1F2937)
             )
@@ -90,7 +95,7 @@ fun DetailsScreen(mission: SingleMissionDto, navController: NavHostController, v
                 contentDescription = mission.titre,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(200.dp)
+                    .height(300.dp)
                     .clip(RoundedCornerShape(24.dp)),
                 contentScale = ContentScale.Crop
             )
@@ -98,14 +103,15 @@ fun DetailsScreen(mission: SingleMissionDto, navController: NavHostController, v
             Spacer(modifier = Modifier.height(16.dp))
 
             // Nom de la mission
-            Text(mission.titre, style = MaterialTheme.typography.titleMedium)
+            Text(" Description: ", style = MaterialTheme.typography.titleSmall)
             Card(
-                shape = RoundedCornerShape(12.dp),
+                shape = RoundedCornerShape(16.dp),
                 colors = CardDefaults.cardColors(containerColor = Color.White),
                 modifier = Modifier.fillMaxWidth()
             ) {
+                Spacer(modifier = Modifier.height(10.dp))
                 Text(
-                    mission.description,
+                    mission.description, style = MaterialTheme.typography.bodyMedium,
                     modifier = Modifier.padding(12.dp),
                     color = Color(0xFF4B5563)
                 )
@@ -147,7 +153,7 @@ fun DetailsScreen(mission: SingleMissionDto, navController: NavHostController, v
                 }
             }
 
-            Spacer(modifier = Modifier.height(120.dp)) // espace pour le bouton
+            Spacer(modifier = Modifier.height(120.dp))
         }
 
         Box(
@@ -160,7 +166,7 @@ fun DetailsScreen(mission: SingleMissionDto, navController: NavHostController, v
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(48.dp),
-                onParticipationChange = { /* rafraîchir si nécessaire */ },
+                onParticipationChange = { },
                 viewModel
             )
         }
