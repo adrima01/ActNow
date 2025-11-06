@@ -30,7 +30,7 @@ import com.example.actnow.viewmodels.ProfileViewModel
 fun ProfileScreen(navController: NavController, viewModel: ProfileViewModel) {
     LazyColumn {
         item {
-            ProfileCard(navController)
+            ProfileCard(navController, viewModel)
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(8.dp),

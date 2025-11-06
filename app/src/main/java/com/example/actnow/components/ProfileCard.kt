@@ -21,27 +21,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.foundation.border
 import androidx.navigation.NavController
-import com.example.actnow.Niveau
-import com.example.actnow.utilisateur
-import java.time.format.DateTimeFormatter
-import java.util.Locale
+import com.example.actnow.viewmodels.ProfileViewModel
 
 
 
 @Composable
-fun ProfileCard(navController: NavController) {
-    val formatter = DateTimeFormatter.ofPattern("MMMM yyyy", Locale.FRENCH)
-    val formattedDate = utilisateur.date.format(formatter)
-    val niveauActuel = Niveau.obtenirNiveauPourHeures(utilisateur.heures)
-    val niveauSuivant = niveauActuel.niveauSuivant()
-
-    val pourcentage: Float = if (niveauSuivant != null) {
-        ((utilisateur.heures - niveauActuel.heuresRequises).toFloat() /
-                (niveauSuivant.heuresRequises - niveauActuel.heuresRequises))
-            .coerceIn(0f, 1f)
-    } else {
-        1f
-    }
+fun ProfileCard(navController: NavController, viewModel: ProfileViewModel) {
 
     Card(
         shape = RoundedCornerShape(16.dp),
@@ -65,7 +50,7 @@ fun ProfileCard(navController: NavController) {
                     .fillMaxWidth()
             ) {
                 Image(
-                    painter = painterResource(id = utilisateur.image),
+                    painter = painterResource(id = viewModel.imageResId),
                     contentDescription = "profile picture",
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
@@ -79,12 +64,12 @@ fun ProfileCard(navController: NavController) {
                     verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
                     Text(
-                        text = utilisateur.prenom + " " + utilisateur.nom,
+                        text = viewModel.fullName,
                         fontSize = 16.sp,
                         fontWeight = FontWeight.Bold,
                     )
                     Text(
-                        text = "Membre depuis $formattedDate",
+                        text = "Membre depuis ${viewModel.formattedDate}",
                         fontSize = 14.sp,
                     )
                     Row (
@@ -99,7 +84,7 @@ fun ProfileCard(navController: NavController) {
                             Text(
                                 modifier = Modifier
                                     .padding(8.dp),
-                                text = niveauActuel.titre,
+                                text = viewModel.niveauActuel.titre,
                                 color = Color.White,
                                 fontSize = 14.sp
                             )
@@ -113,7 +98,7 @@ fun ProfileCard(navController: NavController) {
                             Text(
                                 modifier = Modifier
                                     .padding(8.dp),
-                                text = "${utilisateur.heures}h de bénévolat",
+                                text = "${viewModel.totalHeures}h de bénévolat",
                                 color = Color.White,
                                 fontSize = 14.sp
                             )
@@ -132,7 +117,7 @@ fun ProfileCard(navController: NavController) {
                 ) {
                     StatCard(
                         title = "Mission(s) complétée(s)",
-                        value = utilisateur.missionsCompletees,
+                        value = viewModel.missionsCompletees,
                         modifier = Modifier.weight(1f),
                         icon = Icons.Filled.Done,
                         iconDescription = "Done Icon",
@@ -143,7 +128,7 @@ fun ProfileCard(navController: NavController) {
                     )
                     StatCard(
                         title = "Missions à venir",
-                        value = utilisateur.missionsAVenir,
+                        value = viewModel.count,
                         modifier = Modifier.weight(1f),
                         icon = Icons.Filled.DateRange,
                         iconDescription = "Date Icon",
@@ -158,10 +143,10 @@ fun ProfileCard(navController: NavController) {
                 modifier = Modifier
                     .fillMaxWidth()
             ){
-                Text("Progression vers ${niveauSuivant?.titre}", fontWeight = FontWeight.SemiBold)
+                Text("Progression vers ${viewModel.niveauSuivant?.titre}", fontWeight = FontWeight.SemiBold)
                 Spacer(modifier = Modifier.height(8.dp))
                 LinearProgressIndicator(
-                    progress = { pourcentage },
+                    progress = { viewModel.pourcentage },
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(10.dp),
@@ -169,7 +154,7 @@ fun ProfileCard(navController: NavController) {
                     trackColor = Color.LightGray,
                 )
                 Spacer(modifier = Modifier.height(4.dp))
-                Text("${(pourcentage * 100).toInt()} %", fontSize = 12.sp)
+                Text("${( viewModel.pourcentage * 100).toInt()} %", fontSize = 12.sp)
             }
         }
     }
