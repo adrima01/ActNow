@@ -13,6 +13,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.actnow.missionData
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -52,7 +53,7 @@ fun MainScreen(navController: NavHostController) {
             modifier = Modifier.padding(contentPadding)
         ) {
             composable("missions") {
-                MissionScreen()
+                MissionScreen(navController)
             }
 
             composable("map") {
@@ -70,6 +71,14 @@ fun MainScreen(navController: NavHostController) {
             composable("last_Missions") {
                 LastMissionsScreen(navController)
             }
+            composable("details/{missionId}") { backStackEntry ->
+                val missionId = backStackEntry.arguments?.getString("missionId")
+                val mission = missionData.missions.find { it.id == missionId }
+                if (mission != null) {
+                    DetailsScreen(mission = mission, navController = navController)
+                }
+            }
+
         }
     }
 }
