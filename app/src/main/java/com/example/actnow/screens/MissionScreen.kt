@@ -11,7 +11,6 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.actnow.components.MissionCard
@@ -40,8 +39,8 @@ fun MissionScreen(navController : NavHostController, viewModel: MissionViewModel
             verticalAlignment = Alignment.CenterVertically
         ) {
             MissionSearchBar(
-                value = TextFieldValue(viewModel.searchQuery),
-                onValueChange = { viewModel.onSearchQueryChange(it.text) },
+                value = viewModel.searchQuery,
+                onValueChange = { viewModel.onSearchQueryChange(it) },
                 modifier = Modifier.weight(1f)
             )
 

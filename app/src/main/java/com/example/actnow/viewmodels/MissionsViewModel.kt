@@ -3,6 +3,7 @@ package com.example.actnow.viewmodels
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.lifecycle.ViewModel
 import com.example.actnow.missionData
 import com.example.actnow.SingleMissionDto
@@ -12,14 +13,14 @@ import java.util.Calendar
 class MissionViewModel : ViewModel() {
     val settings = Settings()
 
-    var searchQuery by mutableStateOf("")
+    var searchQuery by mutableStateOf(TextFieldValue(""))
 
     var dateTimeSortAscending by mutableStateOf(true)
 
     var missions by mutableStateOf(missionData.missions)
 
-    fun onSearchQueryChange(query: String) {
-        searchQuery = query
+    fun onSearchQueryChange(newValue: TextFieldValue) {
+        searchQuery = newValue
     }
 
     fun toggleSortOrder() {
@@ -28,7 +29,7 @@ class MissionViewModel : ViewModel() {
 
     fun getFilteredAndSortedMissions(): List<SingleMissionDto> {
         val filtered = missions.filter { mission ->
-            mission.titre.lowercase().contains(searchQuery.lowercase())
+            mission.titre.lowercase().contains(searchQuery.text.lowercase())
         }
 
         val sorted = filtered.sortedWith(compareBy { mission ->
