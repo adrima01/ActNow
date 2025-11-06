@@ -15,10 +15,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
+import androidx.navigation.NavHostController
 import com.example.actnow.SingleMissionDto
 import com.example.actnow.missionData
+import com.example.actnow.viewmodels.MissionViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import org.osmdroid.config.Configuration
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
 import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.MapView
@@ -32,7 +35,7 @@ import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay
 
 
 @Composable
-fun MapScreenWrapper() {
+fun MapScreenWrapper(navController: NavHostController, viewModel: MissionViewModel) {
     var selectedMission by remember { mutableStateOf<SingleMissionDto?>(null) }
     var lastSelectedMission by remember { mutableStateOf<SingleMissionDto?>(null) }
 
@@ -45,10 +48,7 @@ fun MapScreenWrapper() {
             }
         )
     } else {
-        DetailsScreen(
-            mission = selectedMission!!,
-            onBack = { selectedMission = null }
-        )
+        navController.navigate("details/${selectedMission?.id}")
     }
 }
 
@@ -58,6 +58,12 @@ fun MapScreen(
     onSelectMission: (SingleMissionDto) -> Unit
 ) {
     val context = LocalContext.current
+
+    Configuration.getInstance().apply {
+        osmdroidBasePath = context.cacheDir
+        osmdroidTileCache = context.cacheDir
+        userAgentValue = context.packageName
+    }
 
     val mapView = remember {
         MapView(context).apply {

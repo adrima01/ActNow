@@ -18,6 +18,7 @@ data class SingleMissionDto (
     val nombreParticipants: Int,
     val recompenses: List<String>,
     val imageName: String,
+    val adresse: Adresse,
     val participantsImages: List<String>
 )
 
@@ -27,7 +28,7 @@ val missionData = MissionDto(
             id = "1",
             titre = "Marché de Noël",
             association = associationData.associations[0],
-            date = Date.valueOf("2026-12-05"),
+            date = Date.valueOf("2025-12-05"),
             heure = Time.valueOf("14:30:00"),
             lieu = "Metz",
             description = "En ce temps d’hiver, notre association a le plaisir de vous inviter à son marché de Noël solidaire. " +
@@ -39,15 +40,20 @@ val missionData = MissionDto(
                     "ou encore prêter main-forte pour les animations.\n" +
                     "Chaque geste compte, et ensemble, nous pouvons créer un événement chaleureux, festif et engagé.",
             nombreParticipants = 12,
-            listOf("🎁 10 XP", "📜 Certificat de participation", "☕ Boisson chaude offerte"),
+            recompenses = listOf("🎁 10 XP", "📜 Certificat de participation", "☕ Boisson chaude offerte"),
             imageName = "marchenoel",
-            participantsImages = mutableListOf("avatar1", "avatar2", "avatar3")
+            adresse = Adresse(rue = "Rue Madame de Staël",
+                numero = "22",
+                codePostal = "57070",
+                ville = "Metz",
+                pays = "France"),
+            participantsImages = listOf("avatar1", "avatar2", "avatar3")
         ),
         SingleMissionDto(
             id = "2",
             titre = "Plantation de Printemps",
             association = associationData.associations[1],
-            date = Date.valueOf("2026-03-20"),
+            date = Date.valueOf("2025-03-20"),
             heure = Time.valueOf("09:00:00"),
             lieu = "Metz",
             description = "Rejoignez Les Mains Vertes pour une journée de plantation citoyenne au parc Blandan ! 🌱 " +
@@ -56,7 +62,14 @@ val missionData = MissionDto(
             nombreParticipants = 20,
             recompenses = listOf("🌱 15 XP", "🥇 Badge Éco-Citoyen", "🚰 Bouteille réutilisable offerte"),
             imageName = "plantationprintemps",
-            participantsImages = mutableListOf("avatar1", "avatar2", "avatar3")
+            adresse = Adresse(
+                rue = "Rue Saint-Livier",
+                numero = "29",
+                codePostal = "57000",
+                ville = "Metz",
+                pays = "France"
+            ),
+            participantsImages = listOf("avatar1", "avatar2", "avatar3")
         ),
         SingleMissionDto(
             id = "3",
@@ -70,13 +83,20 @@ val missionData = MissionDto(
             nombreParticipants = 8,
             recompenses = listOf("🧤 12 XP", "📜 Certificat d'engagement", "🎁 Goodie bag"),
             imageName = "retraite",
-            participantsImages = mutableListOf("avatar1", "avatar2", "avatar3")
+            adresse = Adresse(
+                rue = "Rue Paul Michaux",
+                numero = "4bis",
+                codePostal = "57000",
+                ville = "Metz",
+                pays = "France"
+            ),
+            participantsImages = listOf("avatar1", "avatar2", "avatar3")
         ),
         SingleMissionDto(
             id = "4",
             titre = "Nettoyage de plage",
             association = associationData.associations[3],
-            date = Date.valueOf("2026-06-08"),
+            date = Date.valueOf("2025-06-08"),
             heure = Time.valueOf("10:00:00"),
             lieu = "Metz",
             description = "Les Gardiens de l’Océan vous invitent à participer à une grande opération de nettoyage de plage à l’occasion de la Journée Mondiale des Océans 🌊. " +
@@ -84,21 +104,35 @@ val missionData = MissionDto(
             nombreParticipants = 25,
             recompenses = listOf("🧤 12 XP", "📜 Certificat d'engagement", "🎁 Goodie bag"),
             imageName = "nettoyage",
-            participantsImages = mutableListOf("avatar1", "avatar2", "avatar3")
+            adresse = Adresse(
+                rue = "Rue aux Ossons",
+                numero = "2",
+                codePostal = "57000",
+                ville = "Metz",
+                pays = "France"
+            ),
+            participantsImages = listOf("avatar1", "avatar2", "avatar3")
         ),
         SingleMissionDto(
             id = "5",
             titre = "Atelier peinture enfants",
             association = associationData.associations[4],
-            date = Date.valueOf("2026-04-12"),
+            date = Date.valueOf("2025-04-12"),
             heure = Time.valueOf("14:00:00"),
             lieu = "Metz",
             description = "Les Petits Artistes recherchent des bénévoles pour encadrer un atelier de peinture avec des enfants de 6 à 10 ans 🎨. " +
-            "Aidez-les à exprimer leur créativité à travers les couleurs et participez à la mise en place de leur exposition de fin d’année.",
+                    "Aidez-les à exprimer leur créativité à travers les couleurs et participez à la mise en place de leur exposition de fin d’année.",
             nombreParticipants = 10,
             recompenses = listOf("📚 15 XP", "🧸 Badge Bienveillance", "🍪 Goûter offert"),
             imageName = "peinture",
-            participantsImages = mutableListOf("avatar1", "avatar2", "avatar3")
+            adresse = Adresse(
+                rue = "En Nexirue",
+                numero = "17",
+                codePostal = "57000",
+                ville = "Metz",
+                pays = "France"
+            ),
+            participantsImages = listOf("avatar1", "avatar2", "avatar3")
         ),
         SingleMissionDto(
             id = "6",
@@ -108,40 +142,61 @@ val missionData = MissionDto(
             heure = Time.valueOf("18:30:00"),
             lieu = "Metz",
             description = "Tous à Table organise une distribution de repas solidaires pour les personnes en situation de précarité 🍲. " +
-            "Les bénévoles aideront à la préparation, la distribution et l’accueil des bénéficiaires. " +
-            "Un moment fort de partage et d’humanité avant les fêtes !",
+                    "Les bénévoles aideront à la préparation, la distribution et l’accueil des bénéficiaires. " +
+                    "Un moment fort de partage et d’humanité avant les fêtes !",
             nombreParticipants = 15,
             recompenses = listOf("🌳 25 XP", "🌎 Badge Nature", "🎖️ Certificat Éco-Acteur"),
             imageName = "repas",
-            participantsImages = mutableListOf("avatar1", "avatar2", "avatar3")
+            adresse = Adresse(
+                rue = "Rue Saint-Etienne",
+                numero = "5",
+                codePostal = "57140",
+                ville = "Woippy",
+                pays = "France"
+            ),
+            participantsImages = listOf("avatar1", "avatar2", "avatar3")
         ),
         SingleMissionDto(
             id = "7",
             titre = "Initiation à la langue des signes",
             association = associationData.associations[6],
-            date = Date.valueOf("2025-12-15"),
+            date = Date.valueOf("2025-09-15"),
             heure = Time.valueOf("17:00:00"),
             lieu = "Metz",
             description = "Participez à un atelier d’initiation à la langue des signes avec Aide & Sourds France 🤟. " +
-            "Apprenez les bases de la communication gestuelle et découvrez comment mieux interagir avec les personnes sourdes au quotidien.",
+                    "Apprenez les bases de la communication gestuelle et découvrez comment mieux interagir avec les personnes sourdes au quotidien.",
             nombreParticipants = 20,
             recompenses = listOf("✏️ 10 XP", "⭐ Badge Éducation", "📜 Attestation de tutorat"),
             imageName = "signes",
-            participantsImages = mutableListOf("avatar1", "avatar2", "avatar3")
+            adresse = Adresse(
+                rue = "Rue des Jardins",
+                numero = "27",
+                codePostal = "57000",
+                ville = "Metz",
+                pays = "France"
+            ),
+            participantsImages = listOf("avatar1", "avatar2", "avatar3")
         ),
         SingleMissionDto(
             id = "8",
             titre = "Journée d’adoption et de sensibilisation",
             association = associationData.associations[7],
-            date = Date.valueOf("2026-01-18"),
+            date = Date.valueOf("2025-05-18"),
             heure = Time.valueOf("11:00:00"),
             lieu = "Metz",
             description = "Le Refuge Animalier du Soleil organise une grande journée d’adoption ! 🐾 " +
-            "Les bénévoles aideront à accueillir le public, présenter les animaux et sensibiliser sur la cause animale.",
+                    "Les bénévoles aideront à accueillir le public, présenter les animaux et sensibiliser sur la cause animale.",
             nombreParticipants = 12,
             recompenses = listOf("🥾 30 XP", "🎽 T-shirt de l’événement", "🏅 Badge Marche Solidaire"),
             imageName = "adoption",
-            participantsImages = mutableListOf("avatar1", "avatar2", "avatar3")
+            adresse = Adresse(
+                rue = "Rue de la Charmille",
+                numero = "13",
+                codePostal = "57155",
+                ville = "Marly",
+                pays = "France"
+            ),
+            participantsImages = listOf("avatar1", "avatar2", "avatar3")
         )
     )
 )

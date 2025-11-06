@@ -64,6 +64,11 @@ val utilisateur = Utilisateur(
         nombreParticipants = 12,
         listOf("🎁 10 XP", "📜 Certificat de participation", "☕ Boisson chaude offerte"),
         imageName = "marchenoel",
+        adresse = Adresse(rue = "Rue Madame de Staël",
+            numero = "22",
+            codePostal = "57070",
+            ville = "Metz",
+            pays = "France"),
         participantsImages = listOf("avatar1", "avatar2", "avatar3")
     ),
     SingleMissionDto(
@@ -79,6 +84,13 @@ val utilisateur = Utilisateur(
         nombreParticipants = 20,
         recompenses = listOf("🌱 15 XP", "🥇 Badge Éco-Citoyen", "🚰 Bouteille réutilisable offerte"),
         imageName = "plantationprintemps",
+        adresse = Adresse(
+            rue = "Rue Saint-Livier",
+            numero = "29",
+            codePostal = "57000",
+            ville = "Metz",
+            pays = "France"
+        ),
         participantsImages = listOf("avatar1", "avatar2", "avatar3")
     ))
 )

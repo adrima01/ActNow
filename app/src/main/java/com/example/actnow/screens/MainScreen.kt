@@ -75,7 +75,7 @@ fun MainScreen(navController: NavHostController) {
             }
 
             composable("map") {
-                MapScreen()
+                MapScreenWrapper(navController = navController, viewModel = missionViewModel)
             }
 
             composable("profile") {
