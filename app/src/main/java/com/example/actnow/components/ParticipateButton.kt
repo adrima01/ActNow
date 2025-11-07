@@ -13,7 +13,6 @@ import com.example.actnow.viewmodels.MissionViewModel
 fun ParticipateButton(
     missionId: String,
     modifier: Modifier = Modifier,
-    onParticipationChange: (Boolean) -> Unit,
     viewModel: MissionViewModel
 ) {
 
@@ -21,7 +20,6 @@ fun ParticipateButton(
         onClick = {
             viewModel.isParticipating = !viewModel.isParticipating
             viewModel.settings.putBoolean(missionId, viewModel.isParticipating)
-            onParticipationChange(viewModel.isParticipating)
             viewModel.addOrRemoveUserPicture(viewModel.isParticipating)
         },
         modifier = modifier.fillMaxWidth(),

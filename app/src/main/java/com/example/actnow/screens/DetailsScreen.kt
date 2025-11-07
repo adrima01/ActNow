@@ -166,7 +166,6 @@ fun DetailsScreen(mission: SingleMissionDto, navController: NavHostController, v
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(48.dp),
-                onParticipationChange = { },
                 viewModel
             )
         }
