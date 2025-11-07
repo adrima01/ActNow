@@ -37,7 +37,7 @@ fun MissionCard(
     ElevatedCard(
         modifier = Modifier
             .fillMaxWidth()
-            .border(2.dp, if (isParticipating) Color(0xFF4CAF50) else MaterialTheme.colorScheme.outline, RoundedCornerShape(16.dp))
+            .border(2.dp, if (isParticipating) Color.Blue.copy(alpha = 0.3f) else MaterialTheme.colorScheme.outline, RoundedCornerShape(16.dp))
             .clip(RoundedCornerShape(16.dp))
             .clickable { onClick() }
             .height(150.dp),
