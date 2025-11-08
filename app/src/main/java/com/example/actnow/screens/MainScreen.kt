@@ -19,6 +19,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.actnow.missionData
 import com.example.actnow.viewmodels.MissionViewModel
 import com.example.actnow.viewmodels.ProfileViewModel
@@ -29,19 +30,23 @@ fun MainScreen(navController: NavHostController) {
 
     val startDestination = Destination.MISSION
     var selectedDestination by rememberSaveable { mutableIntStateOf(startDestination.ordinal) }
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentRoute = navBackStackEntry?.destination?.route
 
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = { Text("") },
-                navigationIcon = {
-                    Image(
-                        painter = painterResource(id = R.drawable.logo),
-                        contentDescription = "Logo",
-                        modifier = Modifier.size(40.dp),
-                    )
-                }
-            )
+            if (currentRoute != "next_Missions" && currentRoute != "details/{missionId}" && currentRoute != "last_Missions") {
+                TopAppBar(
+                    title = { Text("") },
+                    navigationIcon = {
+                        Image(
+                            painter = painterResource(id = R.drawable.logo),
+                            contentDescription = "Logo",
+                            modifier = Modifier.size(40.dp),
+                        )
+                    }
+                )
+            }
         },
         bottomBar = {
             NavigationBar {
