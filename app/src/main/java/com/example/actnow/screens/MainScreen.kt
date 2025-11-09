@@ -21,6 +21,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.actnow.missionData
+import com.example.actnow.viewmodels.MapViewModel
 import com.example.actnow.viewmodels.MissionViewModel
 import com.example.actnow.viewmodels.ProfileViewModel
 
@@ -77,6 +78,7 @@ fun MainScreen(navController: NavHostController) {
     ) { contentPadding ->
         val missionViewModel: MissionViewModel = viewModel()
         val profileViewModel: ProfileViewModel = viewModel()
+        val mapViewModel : MapViewModel = viewModel()
         NavHost(
             navController = navController,
             startDestination = "missions",
@@ -87,7 +89,7 @@ fun MainScreen(navController: NavHostController) {
             }
 
             composable("map") {
-                MapScreenWrapper(navController = navController, viewModel = missionViewModel)
+                MapScreen(navController,mapViewModel)
             }
 
             composable("profile") {

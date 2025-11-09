@@ -19,7 +19,9 @@ data class Adresse(
     val numero: String,
     val codePostal: String,
     val ville: String,
-    val pays: String
+    val pays: String,
+    val lat: Double,
+    val long: Double
 )
 
 val associationData = AssociationDto(
@@ -29,11 +31,15 @@ val associationData = AssociationDto(
             nom = "Les pères Noël",
             téléphone = "12 30 26 27 27",
             mail = "noel@gmail.com",
-            adresse = Adresse(rue = "Rue Madame de Staël",
+            adresse = Adresse(
+                rue = "Rue Madame de Staël",
                 numero = "22",
                 codePostal = "57070",
                 ville = "Metz",
-                pays = "France"),
+                pays = "France",
+                lat = 49.101884,
+                long = 6.201481
+            ),
             descritpion = "Association qui s'occupe des événements pendant la période du Noël." +
                     "Elle cherche régulièrement des bénévolants pour leurs marchés et workshops."
         ),
@@ -47,7 +53,9 @@ val associationData = AssociationDto(
                 numero = "29",
                 codePostal = "57000",
                 ville = "Metz",
-                pays = "France"
+                pays = "France",
+                lat = 49.100148,
+                long = 6.172286
             ),
             descritpion = "Association dédiée à la reforestation urbaine et à la création de potagers partagés. " +
                     "Elle recherche des bénévoles pour entretenir les espaces verts et organiser des ateliers écologiques."
@@ -62,7 +70,9 @@ val associationData = AssociationDto(
                 numero = "4bis",
                 codePostal = "57000",
                 ville = "Metz",
-                pays = "France"
+                pays = "France",
+                lat = 49.119089,
+                long = 6.174845
             ),
             descritpion = "Cette association apporte de la joie et du soutien aux personnes isolées et âgées. " +
                 "Elle organise régulièrement des visites, animations et distributions de repas."
@@ -77,7 +87,9 @@ val associationData = AssociationDto(
                 numero = "2",
                 codePostal = "57000",
                 ville = "Metz",
-                pays = "France"
+                pays = "France",
+                lat = 49.115648,
+                long = 6.182490
             ),
             descritpion = "Organisation environnementale qui agit pour la protection des plages et de la biodiversité marine. " +
             "Elle recrute des bénévoles pour des opérations de nettoyage et de sensibilisation."
@@ -92,7 +104,9 @@ val associationData = AssociationDto(
                 numero = "17",
                 codePostal = "57000",
                 ville = "Metz",
-                pays = "France"
+                pays = "France",
+                lat = 49.117037,
+                long = 6.172470
             ),
             descritpion = "Association culturelle qui propose des ateliers d’art pour les enfants et adolescents. " +
             "Elle recherche des bénévoles pour l’encadrement et l’organisation des expositions."
@@ -107,7 +121,9 @@ val associationData = AssociationDto(
                 numero = "5",
                 codePostal = "57140",
                 ville = "Woippy",
-                pays = "France"
+                pays = "France",
+                lat = 49.1423,
+                long = 6.15017
             ),
             descritpion = "Réseau d'entraide alimentaire qui lutte contre le gaspillage. " +
             "Elle recherche des bénévoles pour la collecte, le tri et la distribution de repas solidaires."
@@ -122,7 +138,9 @@ val associationData = AssociationDto(
                 numero = "27",
                 codePostal = "57000",
                 ville = "Metz",
-                pays = "France"
+                pays = "France",
+                lat = 49.1216,
+                long = 6.1776
                 ),
             descritpion = "Association qui favorise l’inclusion des personnes sourdes et malentendantes. " +
             "Elle forme des bénévoles à la langue des signes et organise des événements inclusifs."
@@ -137,7 +155,9 @@ val associationData = AssociationDto(
                 numero = "13",
                 codePostal = "57155",
                 ville = "Marly",
-                pays = "France"
+                pays = "France",
+                lat = 49.062,
+                long = 6.146
             ),
             descritpion = "Refuge qui recueille et soigne les animaux abandonnés. " +
             "Les bénévoles aident à l’entretien du refuge et à la socialisation des animaux."
