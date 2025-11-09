@@ -42,11 +42,15 @@ val missionData = MissionDto(
             nombreParticipants = 12,
             recompenses = listOf("📜 Certificat de participation", "☕ Boisson chaude offerte"),
             imageName = "marchenoel",
-            adresse = Adresse(rue = "Rue Madame de Staël",
+            adresse = Adresse(
+                rue = "Rue Madame de Staël",
                 numero = "22",
                 codePostal = "57070",
                 ville = "Metz",
-                pays = "France"),
+                pays = "France",
+                lat = 49.101884,
+                long = 6.201481
+            ),
             participantsImages = listOf("avatar1", "avatar2", "avatar3")
         ),
         SingleMissionDto(
@@ -67,7 +71,9 @@ val missionData = MissionDto(
                 numero = "29",
                 codePostal = "57000",
                 ville = "Metz",
-                pays = "France"
+                pays = "France",
+                lat = 49.100148,
+                long = 6.172286
             ),
             participantsImages = listOf("avatar1", "avatar2", "avatar3")
         ),
@@ -88,7 +94,9 @@ val missionData = MissionDto(
                 numero = "4bis",
                 codePostal = "57000",
                 ville = "Metz",
-                pays = "France"
+                pays = "France",
+                lat = 49.119089,
+                long = 6.174845
             ),
             participantsImages = listOf("avatar1", "avatar2", "avatar3")
         ),
@@ -109,7 +117,9 @@ val missionData = MissionDto(
                 numero = "2",
                 codePostal = "57000",
                 ville = "Metz",
-                pays = "France"
+                pays = "France",
+                lat = 49.115648,
+                long = 6.182490
             ),
             participantsImages = listOf("avatar1", "avatar2", "avatar3")
         ),
@@ -130,7 +140,9 @@ val missionData = MissionDto(
                 numero = "17",
                 codePostal = "57000",
                 ville = "Metz",
-                pays = "France"
+                pays = "France",
+                lat = 49.117037,
+                long = 6.172470
             ),
             participantsImages = listOf("avatar1", "avatar2", "avatar3")
         ),
@@ -152,7 +164,9 @@ val missionData = MissionDto(
                 numero = "5",
                 codePostal = "57140",
                 ville = "Woippy",
-                pays = "France"
+                pays = "France",
+                lat = 49.1423,
+                long = 6.15017
             ),
             participantsImages = listOf("avatar1", "avatar2", "avatar3")
         ),
@@ -173,7 +187,9 @@ val missionData = MissionDto(
                 numero = "27",
                 codePostal = "57000",
                 ville = "Metz",
-                pays = "France"
+                pays = "France",
+                lat = 49.1216,
+                long = 6.1776
             ),
             participantsImages = listOf("avatar1", "avatar2", "avatar3")
         ),
@@ -194,7 +210,9 @@ val missionData = MissionDto(
                 numero = "13",
                 codePostal = "57155",
                 ville = "Marly",
-                pays = "France"
+                pays = "France",
+                lat = 49.062,
+                long = 6.146
             ),
             participantsImages = listOf("avatar1", "avatar2", "avatar3")
         )
