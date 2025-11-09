@@ -47,7 +47,7 @@ fun DetailsScreen(mission: SingleMissionDto, navController: NavHostController, v
 Column(
 ) {
     IconButton(
-        onClick = { navController.popBackStack() }
+        onClick = { navController.popBackStack() },
     ) {
         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Retour")
     }

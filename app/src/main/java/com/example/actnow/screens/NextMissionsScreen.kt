@@ -32,8 +32,7 @@ fun NextMissionsScreen(navController: NavController, missionViewModel: MissionVi
 
     Column(
         modifier = Modifier
-            .fillMaxWidth()
-            .padding(20.dp),
+            .fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(20.dp)
     ) {
         IconButton(onClick = { navController.popBackStack() }) {
@@ -43,12 +42,15 @@ fun NextMissionsScreen(navController: NavController, missionViewModel: MissionVi
         Text(
             text = "Vos missions à venir",
             fontSize = 16.sp,
-            fontWeight = FontWeight.Bold
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(start = 20.dp)
         )
 
         LazyColumn(
             verticalArrangement = Arrangement.spacedBy(10.dp),
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(20.dp)
         ) {
             items(participatedMissions) { mission ->
                 MissionCard(

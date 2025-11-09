@@ -10,7 +10,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -30,11 +29,9 @@ fun LastMissionsScreen(navController: NavController, viewModel: ProfileViewModel
 
     Column(
         modifier = Modifier
-            .fillMaxWidth()
-            .padding(20.dp),
+            .fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(20.dp)
     ) {
-
         IconButton(onClick = { navController.popBackStack() }) {
             Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Retour")
         }
@@ -42,12 +39,15 @@ fun LastMissionsScreen(navController: NavController, viewModel: ProfileViewModel
         Text(
             text = "Vos missions complétées",
             fontSize = 16.sp,
-            fontWeight = FontWeight.Bold
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(start = 20.dp)
         )
 
         LazyColumn(
             verticalArrangement = Arrangement.spacedBy(10.dp),
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(20.dp)
         ) {
             items(viewModel.missionsCompletees) { mission ->
                 MissionCard(
