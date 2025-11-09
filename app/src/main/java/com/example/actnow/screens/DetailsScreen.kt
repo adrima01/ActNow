@@ -44,7 +44,13 @@ fun DetailsScreen(mission: SingleMissionDto, navController: NavHostController, v
         context.packageName
     )
 
-
+Column(
+) {
+    IconButton(
+        onClick = { navController.popBackStack() }
+    ) {
+        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Retour")
+    }
     Box(modifier = Modifier.fillMaxSize()) {
 
 
@@ -55,11 +61,6 @@ fun DetailsScreen(mission: SingleMissionDto, navController: NavHostController, v
                 .padding(20.dp)
                 .verticalScroll(rememberScrollState())
         ) {
-            IconButton(
-                onClick = { navController.popBackStack() }
-            ) {
-                Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Retour")
-            }
 
             Spacer(modifier = Modifier.height(20.dp))
 
@@ -170,4 +171,6 @@ fun DetailsScreen(mission: SingleMissionDto, navController: NavHostController, v
             )
         }
     }
+}
+
 }
